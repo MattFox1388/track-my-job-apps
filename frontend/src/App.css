@@ -1,0 +1,31 @@
+.app-container {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    height: 100vh;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    gap: 10px;
+    width: 300px;
+}
+
+nav a {
+    color: inherit; /* Use parent color */
+    text-decoration: none; /* Remove underline */
+}
+
+nav a:hover {
+    color: inherit; /* Keep same color on hover */
+    text-decoration: underline; /* Optional: add underline on hover */
+}
+
+.main-content {
+
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "Track My Job Apps",
+  "outputfilename": "track-my-job-apps",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "",
+  "frontend:dev:serverUrl": "",
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "info": {
+    "companyName": "",
+    "productName": "Track My Job Apps",
+    "productVersion": "1.0.0",
+    "copyright": "",
+    "comments": ""
+  }
+}

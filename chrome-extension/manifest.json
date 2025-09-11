@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Job Description Copy",
+    "version": "1.0.0",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "clipboardWrite"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "description": "A chrome extension for copying job description html",
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
