@@ -160,3 +160,6 @@ frontend/wailsjs/
 # Application specific
 scratch
 README.md.bak
+
+token.json
+credentials.json

@@ -5,12 +5,17 @@ import (
 	"fmt"
 	"log"
 	"strings"
-	"time"
+
+	"track-my-job-apps/internal/backup"
+	"track-my-job-apps/internal/database"
+	"track-my-job-apps/internal/models"
+	"track-my-job-apps/internal/parser"
 )
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx    context.Context
+	backup *backup.BackupService
 }
 
 // NewApp creates a new App application struct
@@ -22,93 +27,64 @@ func NewApp() *App {
 // initialize the application.
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
-	
+
 	// Initialize database
-	if err := InitDatabase(); err != nil {
+	if err := database.InitDatabase(); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
+	}
+
+	// Initialize backup service (don't fail if backup setup is incomplete)
+	backupService, err := backup.NewBackupService()
+	if err != nil {
+		log.Printf("Warning: Failed to initialize backup service: %v", err)
+		log.Printf("Backup will be skipped. Make sure you have credentials.json and completed OAuth setup.")
+	} else {
+		log.Println("Backup service initialized successfully")
+		a.backup = backupService
 	}
 }
 
-func (a *App) TrackJobApp(jobAppData string, platform string) (*JobApplication, error) {
+func (a *App) TrackJobApp(jobAppData string, platform string) (*models.JobApplication, error) {
 	fmt.Printf("Received job app data from %s: %s\n", platform, jobAppData)
 
-	lines := strings.Split(jobAppData, "\n")	
-	jobApp := &JobApplication{}
-	
+	lines := strings.Split(jobAppData, "\n")
+	jobApp := &models.JobApplication{}
+
 	// Platform-specific parsing logic
 	switch platform {
 	case "linkedin":
-		return parseLinkedInJob(lines, jobApp)
+		return parser.ParseLinkedInJob(lines, jobApp)
 	case "greenhouse":
-		return parseGreenhouseJob(lines, jobApp)
+		return parser.ParseGreenhouseJob(lines, jobApp)
 	default:
-		return parseLinkedInJob(lines, jobApp) // Default to LinkedIn parsing
+		return parser.ParseLinkedInJob(lines, jobApp) // Default to LinkedIn parsing
 	}
 }
 
-func parseLinkedInJob(lines []string, jobApp *JobApplication) (*JobApplication, error) {
-
-	for i, line := range lines {
-		if (strings.TrimSpace(line) == "") {
-			lines = append(lines[:i], lines[i+1:]...)
-		}
+func (a *App) SaveJobApp(jobApp *models.JobApplication) error {
+	if err := database.CreateApp(jobApp); err != nil {
+		fmt.Printf("Error saving job app: %v\n", err)
+		return err
 	}
 
-	for i, line := range lines {
-		if strings.Contains(line, "$") {
-			jobApp.SalaryRange = strings.TrimSpace(line)
-		}
-
-		workspaceTypeStr := "Matches your job preferences, workplace type is"
-		foundWorkspaceType := strings.Index(line, "Matches your job preferences, workplace type is")
-		if foundWorkspaceType != -1 {
-			jobApp.WorkplaceType = strings.TrimSpace(line[foundWorkspaceType+len(workspaceTypeStr):])
-		}
-		if i == 1 {
-			jobApp.Company = strings.TrimSpace(line)
-		} else if i == 4 {
-			jobApp.Position = strings.TrimSpace(line)
-		} else if i== 5 {
-			parts := strings.Split(line, "·")
-			if len(parts) > 0 {
-				jobApp.Location = strings.TrimSpace(parts[0])
-			}
-		}
-	}
-	jobApp.Status = SUBMITTED
-	jobApp.DateApplied = DateOnly{time.Now()}
-	
-	return jobApp, nil
-}
-
-func parseGreenhouseJob(lines []string, jobApp *JobApplication) (*JobApplication, error) {
-	
-}
-
-func (a *App) SaveJobApp(jobApp *JobApplication) error {
-	if err := CreateApp(jobApp); err != nil {
-        fmt.Printf("Error saving job app: %v\n", err)
-        return err
-    }
-    
-    fmt.Printf("Saved job app: %s at %s (ID: %d)\n", jobApp.Position, jobApp.Company, jobApp.AppId)
-    return nil
+	fmt.Printf("Saved job app: %s at %s (ID: %d)\n", jobApp.Position, jobApp.Company, jobApp.AppId)
+	return nil
 }
 
 // GetAllJobApps returns all job applications from the database
-func (a *App) GetAllJobApps() ([]JobApplication, error) {
-	apps, err := GetAllApps()
+func (a *App) GetAllJobApps() ([]models.JobApplication, error) {
+	apps, err := database.GetAllApps()
 	if err != nil {
 		fmt.Printf("Error getting job apps: %v\n", err)
 		return nil, err
 	}
-	
+
 	fmt.Printf("Retrieved %d job applications\n", len(apps))
 	return apps, nil
 }
 
-func (a *App) SearchByCompany(companyName string) ([]JobApplication, error) {
-	apps, err := SearchByCompany(companyName)
+func (a *App) SearchByCompany(companyName string) ([]models.JobApplication, error) {
+	apps, err := database.SearchByCompany(companyName)
 	if err != nil {
 		fmt.Printf("Error searching by company: %v\n", err)
 		return nil, err
@@ -124,4 +100,30 @@ func getStringFromMap(m map[string]interface{}, key string) string {
 		}
 	}
 	return ""
+}
+
+func (a *App) BeforeClose(ctx context.Context) bool {
+	if a.backup != nil {
+		log.Println("Backing up database before closing...")
+		if err := a.backup.BackupDatabase("job_apps.db"); err != nil {
+			log.Printf("Error backing up database: %v", err)
+		}
+	}
+	return false
+}
+
+// TestBackup manually triggers a backup (for testing)
+func (a *App) TestBackup() error {
+	if a.backup == nil {
+		return fmt.Errorf("backup service not initialized")
+	}
+
+	log.Println("Testing backup...")
+	err := a.backup.BackupDatabase("job_apps.db")
+	if err != nil {
+		log.Printf("Backup test failed: %v", err)
+		return err
+	}
+	log.Println("Backup test successful!")
+	return nil
 }

@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"database/sql/driver"
@@ -17,7 +17,7 @@ func (d *DateOnly) Scan(value interface{}) error {
 		d.Time = time.Time{}
 		return nil
 	}
-	
+
 	switch v := value.(type) {
 	case string:
 		t, err := time.Parse("2006-01-02", v)
@@ -55,7 +55,7 @@ func (d *DateOnly) UnmarshalJSON(data []byte) error {
 		d.Time = time.Time{}
 		return nil
 	}
-	
+
 	str := string(data[1 : len(data)-1]) // Remove quotes
 	t, err := time.Parse("2006-01-02", str)
 	if err != nil {
@@ -69,25 +69,25 @@ func (d *DateOnly) UnmarshalJSON(data []byte) error {
 type Status string
 
 const (
-	SUBMITTED        Status = "SUBMITTED"
-	REJECTED         Status = "REJECTED"
-	PHONE_SCREEN     Status = "PHONE_SCREEN"
-	REMOTE_INTERVIEW Status = "REMOTE_INTERVIEW"
+	SUBMITTED         Status = "SUBMITTED"
+	REJECTED          Status = "REJECTED"
+	PHONE_SCREEN      Status = "PHONE_SCREEN"
+	REMOTE_INTERVIEW  Status = "REMOTE_INTERVIEW"
 	ON_SITE_INTERVIEW Status = "ON_SITE_INTERVIEW"
 )
 
 // JobApplication represents a job application
 type JobApplication struct {
-	AppId         uint      `gorm:"primaryKey;autoIncrement" json:"appId"`
-	Company       string    `gorm:"type:varchar(255);not null;uniqueIndex:idx_company_position_date" json:"company"`
-	Position      string    `gorm:"type:varchar(255);not null;uniqueIndex:idx_company_position_date" json:"position"`
-	Location      string    `gorm:"type:varchar(255)" json:"location"`
-	SalaryRange   string    `gorm:"type:varchar(100)" json:"salaryRange"`
-	WorkplaceType string    `gorm:"type:varchar(50)" json:"workplaceType"`
-	Status        Status    `gorm:"type:varchar(50);default:SUBMITTED" json:"status"`
-	Notes         string    `gorm:"type:text" json:"notes"`
-	Website       string    `gorm:"type:varchar(500)" json:"website"`
-	DateApplied   DateOnly  `gorm:"type:varchar(10);uniqueIndex:idx_company_position_date" json:"dateApplied"`
+	AppId         uint     `gorm:"primaryKey;autoIncrement" json:"appId"`
+	Company       string   `gorm:"type:varchar(255);not null;uniqueIndex:idx_company_position_date" json:"company"`
+	Position      string   `gorm:"type:varchar(255);not null;uniqueIndex:idx_company_position_date" json:"position"`
+	Location      string   `gorm:"type:varchar(255)" json:"location"`
+	SalaryRange   string   `gorm:"type:varchar(100)" json:"salaryRange"`
+	WorkplaceType string   `gorm:"type:varchar(50)" json:"workplaceType"`
+	Status        Status   `gorm:"type:varchar(50);default:SUBMITTED" json:"status"`
+	Notes         string   `gorm:"type:text" json:"notes"`
+	Website       string   `gorm:"type:varchar(500)" json:"website"`
+	DateApplied   DateOnly `gorm:"type:varchar(10);uniqueIndex:idx_company_position_date" json:"dateApplied"`
 }
 
 // TableName specifies the table name for GORM
