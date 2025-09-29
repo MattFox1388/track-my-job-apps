@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -13,6 +14,12 @@ import (
 )
 
 var db *gorm.DB
+
+// DatabaseExists checks if the database file exists
+func DatabaseExists() bool {
+	_, err := os.Stat("job_apps.db")
+	return err == nil
+}
 
 // InitDatabase initializes the SQLite database connection and creates tables
 func InitDatabase() error {
@@ -81,6 +88,7 @@ func GetAppByID(id uint) (*models.JobApplication, error) {
 
 // UpdateApp updates a job application
 func UpdateApp(app *models.JobApplication) error {
+	fmt.Printf("Updating app with id: %v", app.AppId)
 	result := db.Save(app)
 	if result.Error != nil {
 		return fmt.Errorf("failed to update app: %v", result.Error)
@@ -137,4 +145,14 @@ func SearchByCompany(companyName string) ([]models.JobApplication, error) {
 		return nil, result.Error
 	}
 	return apps, nil
+}
+
+// GetAppCount returns the total number of job applications in the database
+func GetAppCount() (int64, error) {
+	var count int64
+	result := db.Model(&models.JobApplication{}).Count(&count)
+	if result.Error != nil {
+		return 0, fmt.Errorf("failed to count apps: %v", result.Error)
+	}
+	return count, nil
 }

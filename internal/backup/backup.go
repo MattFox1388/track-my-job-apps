@@ -197,6 +197,42 @@ func tokenFromFile(file string) (*oauth2.Token, error) {
 	return tok, err
 }
 
+// RestoreDatabase downloads and restores the backup from Google Drive
+func (bs *BackupService) RestoreDatabase(localPath string) error {
+	// Find the backup file
+	fileID, err := bs.findExistingBackup()
+	if err != nil {
+		return fmt.Errorf("unable to find backup file: %v", err)
+	}
+
+	if fileID == "" {
+		return fmt.Errorf("no backup file found in Google Drive")
+	}
+
+	// Download the file
+	resp, err := bs.service.Files.Get(fileID).Download()
+	if err != nil {
+		return fmt.Errorf("unable to download backup: %v", err)
+	}
+	defer resp.Body.Close()
+
+	// Create local file
+	localFile, err := os.Create(localPath)
+	if err != nil {
+		return fmt.Errorf("unable to create local file: %v", err)
+	}
+	defer localFile.Close()
+
+	// Copy content
+	_, err = localFile.ReadFrom(resp.Body)
+	if err != nil {
+		return fmt.Errorf("unable to write backup to local file: %v", err)
+	}
+
+	log.Printf("Database restored successfully from backup to %s", localPath)
+	return nil
+}
+
 // saveToken saves a token to a file path.
 func saveToken(path string, token *oauth2.Token) {
 	fmt.Printf("Saving credential file to: %s\n", path)

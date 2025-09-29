@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './search.css'
+import EditModal from './editModal'
 
 const SearchType = Object.freeze({
     COMPANY: 'company',
@@ -12,6 +13,8 @@ function Search() {
     const [searchType, setSearchType] = useState(SearchType.COMPANY)
     const [results, setResults] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [totalCount, setTotalCount] = useState(0)
+    const [editingJobApp, setEditingJobApp] = useState(null)
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -19,6 +22,10 @@ function Search() {
             console.log(results)
             // get last 20 results
             setResults(results)
+            
+            // Get total count from database
+            const count = await window.go.main.App.GetJobAppCount()
+            setTotalCount(count)
         }
         fetchResults()
     }, [])
@@ -41,6 +48,18 @@ function Search() {
         }
     }
 
+    const handleResultClick = (app) => {
+        console.log(`Editing job app: ${app}`)
+        setEditingJobApp(app)
+    }
+
+    const handleSaveJob = async (app) => {
+        console.log(`Saving job app: ${app}`)
+        const updatedApp = await window.go.main.App.UpdateJobApp(app)
+        console.log(`Updated job app: ${updatedApp}`)
+        setEditingJobApp(null)
+    }
+
     return (
         isLoading ? (
             <div>Loading...</div>
@@ -53,7 +72,7 @@ function Search() {
                                 type="text"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                onKeyPress={handleKeyPress}
+                                onKeyDown={handleKeyPress}
                                 placeholder="Enter company name..."
                                 className="search-input"
                                 disabled={isLoading}
@@ -81,9 +100,18 @@ function Search() {
                         </div>
                     </div>
 
+                    <div className="jobs-summary">
+                        <h2>Total Jobs Applied: {totalCount}</h2>
+                        {results.length < totalCount && (
+                            <p style={{margin: '8px 0 0 0', color: '#666', fontSize: '14px'}}>
+                                Showing {results.length} recent applications
+                            </p>
+                        )}
+                    </div>
+
                     <div className="search-results">
                     {results.map((result) => (
-                        <div className="result-item" key={result.appId}>
+                        <div className="result-item" key={result.appId} onClick={() => handleResultClick(result)}>
                             <h3>{result.company}</h3>
                             <p>{result.position}</p>
                             <p>{result.location}</p>
@@ -97,6 +125,7 @@ function Search() {
                     ))}
                 </div>
                 </div>
+                <EditModal open={editingJobApp !== null} handleClose={() => setEditingJobApp(null)} jobApp={editingJobApp} onSave={handleSaveJob}/>
             </>
         ))
 }

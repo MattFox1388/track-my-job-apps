@@ -28,12 +28,10 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 
-	// Initialize database
-	if err := database.InitDatabase(); err != nil {
-		log.Fatalf("Failed to initialize database: %v", err)
-	}
+	// Check if database exists
+	dbExists := database.DatabaseExists()
 
-	// Initialize backup service (don't fail if backup setup is incomplete)
+	// Initialize backup service first (needed for restore)
 	backupService, err := backup.NewBackupService()
 	if err != nil {
 		log.Printf("Warning: Failed to initialize backup service: %v", err)
@@ -41,6 +39,22 @@ func (a *App) startup(ctx context.Context) {
 	} else {
 		log.Println("Backup service initialized successfully")
 		a.backup = backupService
+
+		// If database doesn't exist and we have backup service, try to restore
+		if !dbExists {
+			log.Println("Database not found, attempting to restore from backup...")
+			if err := a.backup.RestoreDatabase("job_apps.db"); err != nil {
+				log.Printf("Warning: Failed to restore database from backup: %v", err)
+				log.Println("Continuing with fresh database...")
+			} else {
+				log.Println("Database restored successfully from backup")
+			}
+		}
+	}
+
+	// Initialize database
+	if err := database.InitDatabase(); err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
 	}
 }
 
@@ -56,6 +70,8 @@ func (a *App) TrackJobApp(jobAppData string, platform string) (*models.JobApplic
 		return parser.ParseLinkedInJob(lines, jobApp)
 	case "greenhouse":
 		return parser.ParseGreenhouseJob(lines, jobApp)
+	case "workday":
+		return parser.ParseWorkdayJob(lines, jobApp)
 	default:
 		return parser.ParseLinkedInJob(lines, jobApp) // Default to LinkedIn parsing
 	}
@@ -68,6 +84,14 @@ func (a *App) SaveJobApp(jobApp *models.JobApplication) error {
 	}
 
 	fmt.Printf("Saved job app: %s at %s (ID: %d)\n", jobApp.Position, jobApp.Company, jobApp.AppId)
+	return nil
+}
+
+func (a * App) UpdateJobApp(jobApp *models.JobApplication) error {
+	if err := database.UpdateApp(jobApp); err != nil {
+		fmt.Printf("Error updating job app: %v\n", err)
+		return err
+	}
 	return nil
 }
 
@@ -90,6 +114,17 @@ func (a *App) SearchByCompany(companyName string) ([]models.JobApplication, erro
 		return nil, err
 	}
 	return apps, nil
+}
+
+// GetJobAppCount returns the total number of job applications in the database
+func (a *App) GetJobAppCount() (int64, error) {
+	count, err := database.GetAppCount()
+	if err != nil {
+		fmt.Printf("Error getting job app count: %v\n", err)
+		return 0, err
+	}
+	fmt.Printf("Total job applications: %d\n", count)
+	return count, nil
 }
 
 // Helper function to safely get string from map

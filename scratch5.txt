@@ -1,0 +1,928 @@
+HTML: 
+
+	
+
+
+
+<script src="//tbcdn.talentbrew.com/js/client/xvalid.js"></script>
+ 
+
+	<div id="page">
+	<a id="skip-nav" class="access-link" href="#content">Skip to main content</a>
+    
+    
+    
+    
+    
+    
+<header class="header">
+	  
+<div class="header__max-width-wrapper"> 
+
+     <a class="header__logo-link desktop" href="/">
+        <img src="https://tbcdn.talentbrew.com/company/1554/proto-schwab/img/charles-schwab-logo.svg" alt="Charles Schwab">
+    </a>
+    
+    
+    <div class="header__mobile-wrapper">
+        
+     <a class="header__logo-link mobile" href="/">
+        <img src="https://tbcdn.talentbrew.com/company/1554/proto-schwab/img/charles-schwab-logo.svg" alt="Charles Schwab">
+    </a>
+    
+    
+    
+            <button id="js-search-toggle" class="search-toggle">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search <br> jobs
+            </button>
+            
+            <button id="js-nav-button" class="main-nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                Menu
+            </button>
+    
+        
+        
+    
+        <nav class="nav" aria-label="Main">
+            <ul class="nav__list">
+                
+                <li class="nav__item">
+                    <button class="nav__toggle" aria-expanded="false" id="subnavAbout">About Us</button>
+                    <div aria-labelledby="subnavAbout" class="nav__sub-content">
+                        <h2 class="nav__sub-content-heading">About Us</h2>
+                        <ul class="nav__sub-list">
+                            <li class="nav__sub-item"><a class="nav__link" href="/aboutschwab">Charles Schwab</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/how-we-hire">How We Hire</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/workingherefaqs">FAQ</a></li>
+                        </ul>
+                        <div class="nav__back">
+                            <button class="nav__back-btn">Back</button>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav__item">
+                    <button class="nav__toggle" aria-expanded="false" id="subnavCareerAreas">Career Areas</button>
+                    <div aria-labelledby="subnavCareerAreas" class="nav__sub-content">
+                        <h2 class="nav__sub-content-heading">Career Areas</h2>
+                        <ul class="nav__sub-list">
+                            <li class="nav__sub-item"><a class="nav__link" href="/career-areas-overview">Career Areas Overview</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/service">Client Service</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/technology">Technology</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="https://www.schwabjobs.com/retail-services-and-branch-network">Retail Services &amp; Branch Network</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/workplace-financial-solutions">Workplace Financial Solutions</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/corporate-support">Corporate Support</a></li>
+                        </ul>
+                        <div class="nav__back">
+                            <button class="nav__back-btn">Back</button>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav__item">
+                    <button class="nav__toggle" aria-expanded="false" id="subnavLife">Life at Schwab</button>
+                    <div class="nav__sub-content" aria-labelledby="subnavLife">
+                        <h2 class="nav__sub-content-heading">Life at Schwab</h2>
+                        <ul class="nav__sub-list">
+                            <li class="nav__sub-item"><a class="nav__link" href="/blog">Schwab Stories</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/locations">Locations</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/summary-of-benefits">Benefits</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/diversity">Diversity and Inclusion</a></li>
+                        </ul>
+                        <div class="nav__back">
+                            <button class="nav__back-btn">Back</button>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav__item">
+                    <button class="nav__toggle" aria-expanded="false" id="subnavEarlyCareers">Early Careers</button>
+                    <div class="nav__sub-content" aria-labelledby="subnavEarlyCareers">
+                        <h2 class="nav__sub-content-heading">Early Careers</h2>
+                        <ul class="nav__sub-list">
+                            <li class="nav__sub-item"><a class="nav__link" href="/early-careers-overview">Early Careers Overview</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/internship-academy">Interns</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/aspiring-talent-academy">Aspiring Talent Academy</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/nerd-program">NERD Program</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/financial-consultant-academy">Financial Consultant Academy</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" href="/advice-academy">Advice Academy</a></li>
+                        </ul>
+                        <div class="nav__back">
+                            <button class="nav__back-btn">Back</button>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav__item">
+                    <button class="nav__toggle" aria-expanded="false" id="subnavJoining">Joining Schwab</button>
+                    <div class="nav__sub-content" aria-labelledby="subnavJoining">
+                        <h2 class="nav__sub-content-heading">Joining Schwab</h2>
+                        <ul class="nav__sub-list">
+                            <li class="nav__sub-item"><a class="nav__link" href="/virtual-networking">Events</a></li>
+                            <li class="nav__sub-item"><a class="nav__link" data-custom-event="true" data-custom-category="Navigation Link" data-custom-label="Join our Talent Network" href="https://career-schwab.icims.com/connect?back=intro&amp;findajob=1&amp;hashed=-626009902&amp;mobile=false&amp;width=1248&amp;height=500&amp;bga=true&amp;needsRedirect=false&amp;jan1offset=-420&amp;jun1offset=-420">Join Our Talent Network</a></li>
+                        </ul>
+                        <div class="nav__back">
+                            <button class="nav__back-btn">Back</button>
+                        </div>
+                    </div>
+                </li>
+                
+                
+                
+            </ul>
+            
+            
+
+    
+
+    
+
+    <ul class="recently-viewed-job-list secondary-nav" data-recently-viewed-jobs="false" data-company-site-id="58298" data-ajax-url="//www.schwabjobs.com/module/postmodule" data-module-name="Saved Jobs Count" data-module-type="RecentlyViewedJobList" data-selector-name="recentlyviewedjoblist" data-content-type="UserSelected">
+        <li><a class="saved-link" href="/saved-jobs">Saved Jobs<span class="saved-link__count">(0)</span></a></li>
+        <li><a href="https://career-schwab.icims.com/jobs/login?loginOnly=1&amp;redirect=search&amp;mobile=false&amp;width=1230&amp;height=500&amp;bga=true&amp;needsRedirect=false&amp;jan1offset=-300&amp;jun1offset=-240" target="_blank" class="return-login-link">Returning candidate login</a></li>    
+    </ul>
+
+
+
+
+            
+        </nav>
+    </div>
+
+</div>	
+
+
+
+
+
+
+
+
+
+
+<form id="search-form-82f87dbe11" class="search-form expandable-search-form" action="/search-jobs" data-selector-name="searchform" data-filtered-categories="" data-location-geotype="ip2ifnohtml5" data-geolocation-url="/search-jobs/GetSearchRequestGeoLocation" data-module-name="Search Form - Header" data-limited-facets="False" data-default-radius="50" data-location-cookie-lifespan="5" data-use-location-pin="true">
+
+	<div class="search-form-fields">
+	    
+	    <a class="js-search-close search-close">close</a>
+	    
+	     <h2 class="search-form-heading">Search Jobs</h2>
+        <p>
+		    <label for="search-keyword-82f87dbe11">Keyword(s)</label>
+		    <input type="search" id="search-keyword-82f87dbe11" class="search-keyword" placeholder="e.g. Service, Intern, Analyst..." autocomplete="off" name="k" value="" maxlength="150">
+        </p>
+        <p>
+            <label for="search-location-82f87dbe11">Location</label>
+		    <input type="text" id="search-location-82f87dbe11" class="search-location" placeholder="e.g. Westlake, Texas" autocomplete="off" name="l" value="" maxlength="150" data-lat="39.53957" data-lon="-104.84528" data-kt="" data-lt="4" data-lp="6252001-5417618-5419891-5430784" data-ajax-url="/search-jobs/locations?term=" data-country-codes="" data-display-typeahead="true" data-error-message="Please try again. Choose a location from the suggestions or clear the field to submit your search." data-pc="" data-init-val="Meridian, CO">
+                <input type="button" id="search-location-pin-82f87dbe11" class="location-pin" value="Use Location" aria-hidden="true">
+		</p>
+        <input id="search-org-ids-82f87dbe11" name="orgIds" type="hidden" value="27326">
+        <button id="search-submit-82f87dbe11" class="search-submit" data-last-action="search-submit">Search</button>
+		<p class="search-location-error" aria-hidden="true"></p>
+	</div>
+</form>
+
+
+
+
+           
+</header>
+
+	<main id="content">
+        	            
+		
+
+<div class="banner animatedParent animateOnce small" data-section-guide="Banner (Editable)">
+
+    <span class="banner-line-vertical animated fadeInDown delay-250 go"></span>
+    <span class="banner-line-horizontal animated left-to-right delay-1250 go"></span>
+
+
+    
+
+
+    
+    <div class="banner__content">
+        <div class="banner__text-wrapper">
+            
+<h2>We can move an entire industry forward when we lead the way together.</h2>
+
+        </div>
+        <div class="banner__image-wrapper animated pulse delay-2000 go">
+                    <img alt="" src="//tbcdn.talentbrew.com/company/27326/gst_v1_0/img/banner-jd-image.jpg" loading="lazy">
+
+
+        </div>
+    </div>
+</div>
+				
+<div class="max-width-padding job-details-wrap ">
+   
+    
+
+
+
+
+
+
+
+    <section class="job-description" data-selector-name="jobdetails" data-org-id="33727" data-job-id="84170447632" data-save-jobs="true">
+
+		<div class="job-description__header">
+		    <div class="job-description__title">
+                <h1>Data Scientist - Platform Automation and Analytics</h1> 
+                
+               
+                
+                
+                <div class="job-location-wrapper">
+                            <span class="job-location">Lone Tree, CO</span>
+                            <span class="job-location">; Westlake, TX</span>
+                            <span class="job-location">; Austin, TX</span>
+                            <span class="job-location">; Omaha, NE</span>
+                </div>
+                
+ <span class="job-id job-info"><b>Requisition ID</b> 2025-113142</span>             
+            
+      
+            
+                <span class="job-cat job-info"><b>Category</b> Data Analytics and Strategy</span>
+                
+                    <span class="job-type job-info"><b>Position type</b> Regular</span>
+                    <span class="job-salary job-info"><b>Pay range</b> USD $83,800.00 - $155,000.00 / Year</span>
+                    <span class="job-salary job-info"><b>Application deadline</b> 2025-09-15</span>
+            </div>
+            
+            <div class="job-buttons">
+	<a class="button job-apply top" data-job-id="84170447632" data-job-organization-id="33727" data-selector-name="job-apply-link" data-page-type="Job" data-page-name="Job Details" data-override-candidate-card="False" data-delay-url="False" data-apply-url="https://career-schwab.icims.com/jobs/113142/data-scientist---platform-automation-and-analytics/login" href="https://career-schwab.icims.com/jobs/113142/data-scientist---platform-automation-and-analytics/login?utm_campaign=Client_Service&amp;utm_medium=paid_search&amp;utm_content=search_engine&amp;utm_source=google.com&amp;utm_term=385256705&amp;iis=paid_search&amp;iisn=rd_google&amp;ss=paid&amp;gad_source=1&amp;gad_campaignid=19582352366&amp;gbraid=0AAAAApK1Sn1ZPz5Zwldn68tuTa9ujApMQ&amp;gclid=CjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE" rel="nofollow" data-apply-mobile="true" data-url-type="0" style="pointer-events: auto;">Apply</a>                    <button type="button" class="js-save-job-btn" data-job-id="84170447632" data-org-id="33727" data-job-saved="false">Save job</button>
+    
+            </div>
+        </div>
+        <div class="job-description__description">
+    
+            <div class="ats-description">
+                <h2 class="job-details-subheadline">Your opportunity</h2><br><div><p style="margin: 0px;"><span>At Schwab, you’re empowered to make an impact on your career. Here, innovative thought meets creative problem solving, helping us “challenge the status quo” and transform the finance industry together.</span><span></span></p></div><div><p style="margin: 0px;"><span></span></p></div><div><p style="margin: 0px;"><span>The Treasury team is a team within our Finance department.&nbsp; We are responsible for balance sheet management strategy, portfolio and brokered deposit notional investment allocation decisions, balance sheet modeling and analytics, market risk management, ALM derivatives, and net interest revenue forecasting.&nbsp; The overall team manages fixed-income investments in several portfolios totaling approximately $500 billion in balance sheet assets and approximately $100 billion in off-balance-sheet brokered deposit agreement notional investments.&nbsp;</span><span></span></p></div><div><p style="margin: 0px;"><span></span></p></div><div><p style="margin: 0px;"><span>We are looking for a </span><strong><span>Data Scientist</span></strong><span>w</span><span>ith a strong technology and solution delivery acumen who will be responsible for the successful design, development, and delivery of business intelligence solutions. One of the key initial responsibilities would be to develop the data engineering infrastructure for the net interest revenue and market risk forecasting projects.</span></p></div><h2 class="job-details-subheadline">What you have</h2><br><div></div><div><p style="margin: 0px;"><strong>Required Skills:</strong></p><div><ul><li><span>Bachelors in Computer Science, Engineering or Information Technology. Masters preferred.</span><span></span></li><li><span>3+ years of professional experience in development, support, and maintenance of ETL and database applications</span><span></span></li><li><span>3+ years of hands-on experience in Python and object-oriented programming</span><span></span></li><li><span>3+ years of hands-on experience with SQL and relational database concepts</span><span></span></li><li><span>1+ years of hands-on experience with statically-typed language (C++, C#, Java, etc.)</span><span></span></li><li><span>Familiarity with DevOps tools and CI/CD best practices; examples include Git (GitHub, GitLab, Bitbucket, etc.), Bamboo, Jenkins, Terraform etc.</span><span></span></li><li><span>Familiarity and comfortable with Agile development methodologies</span><span></span></li><li><span>Critical-thinking and strong problem-solving skills with ability to analyze and understand data.</span><span></span></li></ul></div><div><p style="margin: 0px;"><strong><span>Preferred Skills:</span></strong><span></span></p></div><div><ul><li><span>Experience in the Financial Services industry is a plus.</span><span></span></li><li><span>Experience with Google Cloud Platform tools (BigQuery, Vertex, Compute Engine, Cloud Composer, DataProc)</span><span></span></li><li><span>Familiarity with BI tools such as Power BI or Tableau</span><span></span></li><li><span>Experience with Control M or Farnam</span><span></span></li><li><span>Front end development experience (Javascript, React, or similar)</span><span></span></li><li><span>Ability to interpret key trends and metrics and leverage them for actionable decisions.</span><span></span></li><li><span>Strong oral, written, and interpersonal skills for interacting and throughout all levels of the organization.</span><span></span></li></ul><p style="margin: 0px;"><strong>What you'll do:</strong></p><p style="margin: 0px;"></p><div><div><p style="margin: 0px;"><span>In this role, the individual will:</span><span></span></p></div><div><ul><li><p style="margin: 0px;"><span>Design, develop, test, and maintain ETL workflows and database applications</span><span></span></p></li><li><p style="margin: 0px;"><span>Write clean, maintainable code in Python and SQL</span><span></span></p></li><li><p style="margin: 0px;"><span>Create reusable Python libraries, templates, and CI/CD hooks to standardize ETL and QA/QC across multiple projects&nbsp;</span><span></span></p></li><li><p style="margin: 0px;"><span>Design, develop, and maintain a modular QA/QC framework for automated data validation, anomaly detection, and quality reporting</span><span></span></p></li><li><p style="margin: 0px;"><span>Collaborate with cross-functional teams to codify data quality rules and build unit and integration‑level tests into ETL pipelines</span><span></span></p></li><li><p style="margin: 0px;"><span>Build and optimize data models, performance tuning, and load strategies</span><span></span></p></li><li><p style="margin: 0px;"><span>Implement DevOps best practices — including source control (Git), CI/CD pipelines, and automated deployments</span><span></span></p></li><li><p style="margin: 0px;"><span>Troubleshoot, debug, and resolve production issues to ensure high availability</span><span></span></p></li><li><p style="margin: 0px;"><span>Identify opportunities for automation and system improvement</span><span></span></p></li><li><p style="margin: 0px;"><span>Collaborate with technology, analytics, and business partners to gather requirements and deliver reliable data products</span><span></span></p></li><li><p style="margin: 0px;"><span>Contribute to documentation of architecture, design decisions, and operational runbooks</span><span></span></p></li><li><p style="margin: 0px;"><span>Plan, estimation, scheduling, prioritization, and coordination of technical activities related to system development.</span><span></span></p></li><li><p style="margin: 0px;"><span>Ensure system alignment to architecture policies and best practices; ensure that process methodologies are followed in system development.</span><span></span></p></li><li><p style="margin: 0px;"><span>Provide mentorship and hands-on coding support to the team.</span></p></li></ul><p style="margin: 0px;"><span>In addition to the salary range, this role is also eligible for bonus or incentive opportunities.&nbsp;</span></p></div></div></div></div><br><div class=""><h2 class="job-details-subheadline">What’s in it for you</h2><p>At Schwab, we’re committed to empowering our employees’ personal and professional success. Our purpose-driven, supportive culture, and focus on your development means you’ll get the tools you need to make a positive difference in the finance industry. Our <a href="/hybrid-work">Hybrid Work and Flexibility</a> approach balances our ongoing commitment to workplace flexibility, serving our clients, and our strong belief in the value of being together in person on a regular basis.</p><p>We offer a competitive <a href="/summary-of-benefits">benefits package</a> that takes care of the whole you – both today and in the future:</p><ul><li>401(k) with company match and Employee stock purchase plan</li><li>Paid time for vacation, volunteering, and 28-day sabbatical after every 5 years of service for eligible positions</li><li>Paid parental leave and family building benefits</li><li>Tuition reimbursement</li><li>Health, dental, and vision insurance</li></ul></div>
+                
+            
+            <div class="job-buttons bottom">
+	<a class="button job-apply bottom" data-job-id="84170447632" data-job-organization-id="33727" data-selector-name="job-apply-link" data-page-type="Job" data-page-name="Job Details" data-override-candidate-card="False" data-delay-url="False" data-apply-url="https://career-schwab.icims.com/jobs/113142/data-scientist---platform-automation-and-analytics/login" href="https://career-schwab.icims.com/jobs/113142/data-scientist---platform-automation-and-analytics/login?utm_campaign=Client_Service&amp;utm_medium=paid_search&amp;utm_content=search_engine&amp;utm_source=google.com&amp;utm_term=385256705&amp;iis=paid_search&amp;iisn=rd_google&amp;ss=paid&amp;gad_source=1&amp;gad_campaignid=19582352366&amp;gbraid=0AAAAApK1Sn1ZPz5Zwldn68tuTa9ujApMQ&amp;gclid=CjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE" rel="nofollow" data-apply-mobile="true" data-url-type="0" style="pointer-events: auto;">Apply</a>                        <button type="button" class="js-save-job-btn" data-job-id="84170447632" data-org-id="33727" data-job-saved="false">Save job</button>
+            </div>
+                
+            </div>
+               
+            <div id="social-share" class="ss-sm">
+                <section class="social-share">
+                    <h3>Share:</h3>
+                    <ul class="social-share-items">
+                            <li><a class="share facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fschwab-internal.runmytests.com%2fjob%2fsandy-springs%2fclient-relationship-specialist-atlanta-ga-perimeter%2f33727%2f48772053744%3futm_source%3dfacebook.com%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social" target="_blank">Facebook</a></li>
+                            <li><a class="share linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fschwab-internal.runmytests.com%2fjob%2fsandy-springs%2fclient-relationship-specialist-atlanta-ga-perimeter%2f33727%2f48772053744%3futm_source%3dlinkedin.com%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social&amp;title=Client+Relationship+Specialist+-+Atlanta%2c+GA+(Perimeter)" target="_blank">LinkedIn</a></li>
+                            <li><a class="share twitter" href="https://twitter.com/intent/tweet?text=Client+Relationship+Specialist+-+Atlanta%2c+GA+(Perimeter)&amp;url=https://schwab-internal.runmytests.com/job/sandy-springs/client-relationship-specialist-atlanta-ga-perimeter/33727/48772053744?utm_source=twitter.com%26utm_medium=social_post%26utm_campaign=Charles_Schwab_social" target="_blank">Twitter</a></li>
+                            <li><a class="share email" href="mailto:?subject=Client%20Relationship%20Specialist%20-%20Atlanta%2C%20GA%20%28Perimeter%29&amp;body=https%3a%2f%2fschwab-internal.runmytests.com%2fjob%2fsandy-springs%2fclient-relationship-specialist-atlanta-ga-perimeter%2f33727%2f48772053744%3futm_source%3demail%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social">Email</a></li>
+                    </ul>
+                    
+                </section>
+            </div>
+
+                    <div class="job-description__benefits">
+                        <h2 class="job-description__benefits-headline">Eligible Schwabbies receive</h2>
+                        <ul>
+                            <li>
+                                <img src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/icon-heart.svg" alt="">
+                                <h2>Medical, dental and vision benefits</h2>
+                            </li> 
+                            <li>
+                                <img src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/icon-egg.svg" alt="">
+                                <h2>401(k) and employee stock purchase plans</h2>
+                            </li> 
+                            <li>
+                                <img src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/icon-grad.svg" alt="">
+                                <h2>Tuition reimbursement to keep developing your career</h2>
+                            </li> 
+                            <li>
+                                <img src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/icon-family.svg" alt="">
+                                <h2>Paid parental leave and adoption/family building benefits</h2>
+                            </li> 
+                            <li>
+                                <img src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/icon-plane.svg" alt="">
+                                <h2>Sabbatical leave available after five years of employment</h2>
+                            </li>                     
+                        </ul>
+                    </div>
+                
+        </div>
+    </section>
+ 
+ 
+
+<form id="social-share" action="/subscribe/workwithme" data-error="" data-logged-in="" data-registered="" data-approved-domains="" data-ajax-url="//www.schwabjobs.com/subscribe/workwithme" data-workwithme="False" data-selector-name="socialshare">
+        <section class="social-share">
+            <h3>Share:</h3>
+            <ul class="social-share-items">
+	                <li><a class="share facebook" data-job-id="84170447632" data-job-location="5429208|4741196|4671654|5074472" data-job-title="Data Scientist - Platform Automation and Analytics" data-share-refer-url="//www.schwabjobs.com/subscribe/refer/" data-share-type="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.schwabjobs.com%2fjob%2flone-tree%2fdata-scientist-platform-automation-and-analytics%2f33727%2f84170447632%3futm_source%3dfacebook.com%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+	                <li><a class="share linkedin" data-job-id="84170447632" data-job-location="5429208|4741196|4671654|5074472" data-job-title="Data Scientist - Platform Automation and Analytics" data-share-refer-url="//www.schwabjobs.com/subscribe/refer/" data-share-type="linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.schwabjobs.com%2fjob%2flone-tree%2fdata-scientist-platform-automation-and-analytics%2f33727%2f84170447632%3futm_source%3dlinkedin.com%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social&amp;title=Data+Scientist+-+Platform+Automation+and+Analytics" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+	                <li><a class="share twitter" data-job-id="84170447632" data-job-location="5429208|4741196|4671654|5074472" data-job-title="Data Scientist - Platform Automation and Analytics" data-share-refer-url="//www.schwabjobs.com/subscribe/refer/" data-share-type="twitter" href="https://x.com/intent/post?text=Data+Scientist+-+Platform+Automation+and+Analytics&amp;url=https://www.schwabjobs.com/job/lone-tree/data-scientist-platform-automation-and-analytics/33727/84170447632?utm_source=twitter.com%26utm_medium=social_post%26utm_campaign=Charles_Schwab_social" rel="noopener noreferrer" target="_blank">X</a></li>
+	                <li><a class="share email" data-job-id="84170447632" data-job-location="5429208|4741196|4671654|5074472" data-job-title="Data Scientist - Platform Automation and Analytics" data-share-refer-url="//www.schwabjobs.com/subscribe/refer/" data-share-type="email" href="mailto:?subject=Data%20Scientist%20-%20Platform%20Automation%20and%20Analytics&amp;body=https%3a%2f%2fwww.schwabjobs.com%2fjob%2flone-tree%2fdata-scientist-platform-automation-and-analytics%2f33727%2f84170447632%3futm_source%3demail%26utm_medium%3dsocial_post%26utm_campaign%3dCharles_Schwab_social">Email</a></li>
+            </ul>
+        </section>
+    </form>
+
+
+ 
+ 
+    
+ 
+</div>
+				
+<div class="">
+
+    
+
+<div class="js-hub hub__wrapper content-feed related-content animatedParent animateOnce initialized" id="data-content-feed-c0555d8ad0" data-keepmappings="1" data-narrowmappings="0" data-load-more-max="3" data-load-more-default="3" data-load-more-amount="0" data-load-more-current="3" data-no-results-text="No results found, please try picking another combination of filters." data-results-found-text="Results found." data-no-prefiltered-results-text="No results found, please come back later." data-feed-tracking-id="">
+
+
+<span class="rc-line-vertical animated fadeInDown delay-250"></span>
+<span class="rc-line-horizontal animated left-to-right delay-1250"></span>
+
+  <ul class="hub-prefilter" hidden="">
+
+
+
+
+    
+        <li class="js-hub-prefilter" data-query="[data-content-feed-c0555d8ad0-pillar-3='315']"></li>
+
+  </ul>
+
+
+  <ul class="js-hub-content hub-content__list js-tmp-randomize" data-sort="1" data-sort-direction="0" data-sort-criteria="data-hub-title" data-system-css-columns="3">
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+  <li class="js-hub-item hub-content__item showing-by-filter showing-by-load" data-hub-read-time="" data-hub-origin="True" data-hub-title="Students" data-hub-meta="We’re all-in when it comes to developing talent – from internships and academies to our tech leader program." data-hub-url="www.schwabjobs.com/internship-academy" data-hub-isfallbackpage="True" data-hub-order="0" data-hub-link="/internship-academy" data-hub-image="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image1.webp" data-hub-created-by="SS created" data-hub-date-updated="09/02/2025 15:26:23" data-hub-date-created="07/13/2023 19:36:07" data-hub-date-override="07/07/2023 00:00:00" data-num="0" data-set-active="1">
+
+        <a href="/internship-academy" class="js-hub-item-link js-tb-click-tracking hub-item__link" data-custom-category="Content Feed" data-custom-label="Content Engagement">
+
+          <div class="hub-item__image-wrapper">
+
+
+          <img class="js-hub-lazy hub-item__image" src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image1.webp" alt="">
+
+        </div>
+
+        <div class="hub-item__text">
+
+          <span class="hub-item__title">Students</span>
+
+
+            <span class="hub-item__description">
+
+              We’re all-in when it comes to developing talent – from internships and academies to our tech leader program.
+
+              <span class="hub-item__fake-button">Learn more</span>
+
+            </span>
+            
+            <span class="hub-attributes">
+                <span class="hub__display-date">July 07, 2023</span>
+                <span class="hub__display-read"></span>
+
+
+            </span>
+
+          </div>
+
+        </a>
+
+        <ul class="js-hub-mappings" hidden="">
+
+
+          
+
+        </ul>
+
+      </li><li class="js-hub-item hub-content__item showing-by-filter showing-by-load" data-hub-read-time="" data-hub-origin="True" data-hub-title="Schwab Stories" data-hub-meta="There’s no better way to discover life at Schwab than hearing it from the amazing people who experience it every day." data-hub-url="www.schwabjobs.com/blog" data-hub-isfallbackpage="True" data-hub-order="0" data-hub-link="/blog" data-hub-image="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image3.jpg" data-hub-created-by="SS created" data-hub-date-updated="06/06/2025 16:04:42" data-hub-date-created="07/13/2023 20:04:46" data-hub-date-override="07/07/2023 00:00:00" data-num="1" data-set-active="1">
+
+        <a href="/blog" class="js-hub-item-link js-tb-click-tracking hub-item__link" data-custom-category="Content Feed" data-custom-label="Content Engagement">
+
+          <div class="hub-item__image-wrapper">
+
+
+          <img class="js-hub-lazy hub-item__image" src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image3.jpg" alt="">
+
+        </div>
+
+        <div class="hub-item__text">
+
+          <span class="hub-item__title">Schwab Stories</span>
+
+
+            <span class="hub-item__description">
+
+              There’s no better way to discover life at Schwab than hearing it from the amazing people who experience it every day.
+
+              <span class="hub-item__fake-button">Learn more</span>
+
+            </span>
+            
+            <span class="hub-attributes">
+                <span class="hub__display-date">July 07, 2023</span>
+                <span class="hub__display-read"></span>
+
+
+            </span>
+
+          </div>
+
+        </a>
+
+        <ul class="js-hub-mappings" hidden="">
+
+
+          
+
+        </ul>
+
+      </li><li class="js-hub-item hub-content__item showing-by-filter showing-by-load" data-hub-read-time="" data-hub-origin="True" data-hub-title="Diversity and inclusion" data-hub-meta="We make sure everyone feels valued, supported, and welcomed. Because that’s what moves us forward." data-hub-url="www.schwabjobs.com/diversity" data-hub-isfallbackpage="True" data-hub-order="0" data-hub-link="/diversity" data-hub-image="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image2.webp" data-hub-created-by="SS created" data-hub-date-updated="07/30/2025 21:22:24" data-hub-date-created="07/13/2023 20:02:43" data-hub-date-override="06/30/2023 00:00:00" data-num="2" data-set-active="1">
+
+        <a href="/diversity" class="js-hub-item-link js-tb-click-tracking hub-item__link" data-custom-category="Content Feed" data-custom-label="Content Engagement">
+
+          <div class="hub-item__image-wrapper">
+
+
+          <img class="js-hub-lazy hub-item__image" src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/img/rc-image2.webp" alt="">
+
+        </div>
+
+        <div class="hub-item__text">
+
+          <span class="hub-item__title">Diversity and inclusion</span>
+
+
+            <span class="hub-item__description">
+
+              We make sure everyone feels valued, supported, and welcomed. Because that’s what moves us forward.
+
+              <span class="hub-item__fake-button">Learn more</span>
+
+            </span>
+            
+            <span class="hub-attributes">
+                <span class="hub__display-date">June 30, 2023</span>
+                <span class="hub__display-read"></span>
+
+
+            </span>
+
+          </div>
+
+        </a>
+
+        <ul class="js-hub-mappings" hidden="">
+
+
+          
+
+        </ul>
+
+      </li></ul>
+
+  <div class="hub__bottom-nav">
+
+    <button class="js-hub-load-more-button hub__load-more-button disabled" data-hub-id="data-content-feed-c0555d8ad0" data-items-loaded-msg="new items have been loaded." data-items-finished-msg="new items have been loaded and all results are now showing.">Load more</button>
+
+  </div>
+
+  <div class="js-aria-hub-msg hub-visually-hidden" aria-live="polite"></div>
+
+</div>
+
+
+
+
+</div>
+	
+<div class="job-tabs">			
+
+    <div class="tab-accordion " data-tab-breakpoint="(min-width:1000px)" data-tab-vertical="" id="tab-accordion-1" data-tab-active="1" role="tablist" aria-orientation="vertical">
+    
+      <button class="tab-accordion__button active" id="tab-button-1-1" aria-controls="tab-panel-1-1" data-button-count="1" aria-selected="true" role="tab">Latest jobs</button>
+    
+      <div class="tab-accordion__panel expanded" id="tab-panel-1-1" tabindex="-1" role="tabpanel" aria-labelledby="tab-button-1-1">
+    
+        <div class="tab-accordion__content">
+    
+            
+
+    <section class="job-list" data-selector-name="joblist">
+                <ul data-save-jobs="true">
+                        <li>
+                            <a href="/job/san-mateo/vp-financial-consultant-san-mateo-ca/33727/75747691440" data-job-id="75747691440">
+                                        <h2>VP, Financial Consultant - San Mateo, CA</h2>
+                                        <span class="location">San Mateo, California, United States</span>
+                            <button type="button" class="js-save-job-btn" data-job-id="75747691440" data-org-id="33727" data-job-saved="false">Save Job</button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/job/san-ramon/vp-financial-consultant-san-ramon-ca/33727/79499262544" data-job-id="79499262544">
+                                        <h2>VP, Financial Consultant - San Ramon, CA</h2>
+                                        <span class="location">San Ramon, California, United States</span>
+                            <button type="button" class="js-save-job-btn" data-job-id="79499262544" data-org-id="33727" data-job-saved="false">Save Job</button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/job/indianapolis/financial-services-representative/33727/79528728400" data-job-id="79528728400">
+                                        <h2>Financial Services Representative</h2>
+                                        <span class="location">Indianapolis, Indiana, United States</span>
+                            <button type="button" class="js-save-job-btn" data-job-id="79528728400" data-org-id="33727" data-job-saved="false">Save Job</button>
+                            </a>
+                        </li>
+                </ul>
+    </section>
+
+
+        
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button" id="tab-button-1-2" aria-controls="tab-panel-1-2" data-button-count="2" aria-selected="false" role="tab" tabindex="-1">Recently viewed jobs</button>
+    
+      <div class="tab-accordion__panel" id="tab-panel-1-2" role="tabpanel" aria-labelledby="tab-button-1-2">
+    
+        <div class="tab-accordion__content">
+            
+            
+
+    
+
+    <section class="recently-viewed-job-list recently-viewed-jobs-tab job-list" data-recently-viewed-jobs="true" data-company-site-id="58298" data-ajax-url="//www.schwabjobs.com/module/postmodule" data-module-name="Recently Viewed Jobs Tab" data-module-type="RecentlyViewedJobList" data-selector-name="recentlyviewedjoblist" data-content-type="Dynamic">
+            <ul>
+                    <li>
+                        <a href="/job/lone-tree/data-scientist-platform-automation-and-analytics/33727/84170447632" data-job-id="84170447632">
+                                    <h2>Data Scientist - Platform Automation and Analytics</h2>
+                                    <span class="location location">Lone Tree, Colorado, Westlake, Texas, Austin, Texas, Omaha, Nebraska</span>
+    
+    					</a>
+                    </li>
+                    <li>
+                        <a href="/job/phoenix/advanced-application-and-infrastructure-engineer/33727/77978022464" data-job-id="77978022464">
+                                    <h2>Advanced Application and Infrastructure Engineer</h2>
+                                    <span class="location location">Phoenix, Arizona, Omaha, Nebraska, Southlake, Texas, Austin, Texas, Lone Tree, Colorado</span>
+    
+    					</a>
+                    </li>
+
+            </ul>
+    </section>
+
+
+
+            
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button" id="tab-button-1-3" aria-controls="tab-panel-1-3" data-button-count="3" aria-selected="false" role="tab" tabindex="-1">Saved jobs</button>
+    
+      <div class="tab-accordion__panel" id="tab-panel-1-3" role="tabpanel" aria-labelledby="tab-button-1-3">
+    
+        <div class="tab-accordion__content">
+    
+            
+
+    
+
+    
+
+    <section class="recently-viewed-job-list saved-jobs-tab job-list" data-recently-viewed-jobs="false" data-company-site-id="58298" data-ajax-url="//www.schwabjobs.com/module/postmodule" data-module-name="Saved Jobs Tab" data-module-type="RecentlyViewedJobList" data-selector-name="recentlyviewedjoblist" data-content-type="UserSelected">
+            <div class="no-jobs"><p>You have no saved jobs</p></div>
+    </section>
+
+
+
+
+    
+        </div>
+    
+      </div>
+    
+    </div>
+
+</div>	
+
+			            
+	</main>
+	<footer class="footer">
+        
+<div class="footer-top">
+    
+    
+    <div class="social-media" data-selector-name="socialmedia">
+        <h2>Let's connect.</h2>
+        <ul>
+                <li><a class="social-media-facebook" href="//www.facebook.com/CharlesSchwabCareers">Facebook</a></li>
+                <li><a class="social-media-instagram" href="//www.instagram.com/schwabjobs/">Instagram</a></li>
+                <li><a class="social-media-glassdoor" href="//www.glassdoor.com/Reviews/Charles-Schwab-Reviews-E144.htm">Glassdoor</a></li>
+                <li><a class="social-media-linkedin" href="//www.linkedin.com/company/charles-schwab">LinkedIn</a></li>
+        </ul>
+    </div>
+
+
+    
+    <div class="footer-top__list">
+        <div class="footer-top__item">
+            <h2>Join our talent network</h2>
+            <a class="blue-button arrow" data-custom-event="true" data-custom-category="Custom Event" data-custom-label="Sign Up - Join our Talent Network" href="https://career-schwab.icims.com/connect?back=intro&amp;findajob=1&amp;hashed=-626009902&amp;mobile=false&amp;width=1248&amp;height=500&amp;bga=true&amp;needsRedirect=false&amp;jan1offset=-420&amp;jun1offset=-420">Sign up</a>
+        </div>
+        <div class="footer-top__item">
+            <h2>Explore our upcoming events</h2>
+            <a class="blue-button arrow" href="https://www.schwabjobs.com/virtual-networking">View events</a>
+        </div>
+        <div class="footer-top__item">
+            <h2>Returning candidate?</h2>
+            <a class="blue-button arrow" href="https://career-schwab.icims.com/jobs/login?loginOnly=1&amp;redirect=search&amp;mobile=false&amp;width=1230&amp;height=500&amp;bga=true&amp;needsRedirect=false&amp;jan1offset=-300&amp;jun1offset=-240">Log in</a>
+        </div>        
+    </div>
+</div>				
+
+<div class="footer-policies">
+ 
+<div class="footer-policies__wrapper">
+
+
+
+
+  
+
+
+ <p>Schwab is committed to building an inclusive workplace where everyone feels valued. As an Equal Opportunity Employer, our policy is to provide equal employment opportunities to all employees and applicants without regard to protected veteran or disability status, or any individual’s status in any group or class protected by law. Click <a href="https://www.aboutschwab.com/EEO">here</a> to see the policy. If you have a disability and require reasonable accommodations in the application process, contact Human Resources at <a href="mailto:applicantaccessibility@schwab.com">applicantaccessibility@schwab.com</a> or call 800-275-1281.</p>
+ 
+  <p>This site is designed for U.S. residents. Non-U.S. residents are subject to country-specific restrictions. Learn more about our services for <a href="https://international.schwab.com/" target="_blank">non-U.S. residents</a>. © 2025 Charles Schwab &amp; Co., Inc, All rights reserved. Member <a href="https://www.sipc.org/" target="_blank">SIPC</a>. Unauthorized access is prohibited. Usage will be monitored. </p>
+  
+  </div>
+      
+</div>      
+
+<div class="footer-ribbon">
+    <div class="footer-ribbon__wrapper">
+        <ul class="footer-ribbon__list">
+            <li class="footer-ribbon__item"><a href="/sitemap" class="footer-ribbon__link">Sitemap</a></li>
+            <li class="footer-ribbon__item"><a href="https://www.schwab.com/other-sites" target="_blank" class="footer-ribbon__link">Additional Schwab Sites</a></li>
+            <li class="footer-ribbon__item"><a href="https://www.schwabjobs.com/disclosures" class="footer-ribbon__link">Equal Opportunity Employer</a></li>
+            <li class="footer-ribbon__item"><a href="https://tbcdn.talentbrew.com/company/27326/full_v2_0/pdf/onlinerecruitmentnotice032024.pdf" target="_blank" class="footer-ribbon__link">Candidate Privacy Notice</a></li>
+            <li class="footer-ribbon__item"><a href="/cookie-management" class="footer-ribbon__link">Cookie Management</a></li>
+            
+        </ul> 
+        
+    
+        <img class="footer-ribbon__logo" src="https://tbcdn.talentbrew.com/company/1554/proto-schwab/img/charles-schwab-logo.svg" alt="">
+
+    </div>
+</div>
+
+<div class="footer-link-section">
+   <div class="footer-link-section__wrapper"> 
+   
+        <div>
+            <ul class="footer-link-section__list">
+                <li class="footer-link-section__item"><p class="footer-link-section__heading">Charles Schwab Corporation</p></li>
+                <li class="footer-link-section__item"><a href="https://www.schwab.com/client-home" target="_blank" class="footer-link-section__link">Schwab.com</a></li>
+                <li class="footer-link-section__item"><a href="https://www.aboutschwab.com/" target="_blank" class="footer-link-section__link">Overview</a></li>
+                <li class="footer-link-section__item"><a href="https://www.aboutschwab.com/who-we-are" target="_blank" class="footer-link-section__link">Who We Are</a></li>
+                <li class="footer-link-section__item"><a href="https://www.aboutschwab.com/what-we-do" target="_blank" class="footer-link-section__link">What We Do</a></li>
+
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+
+
+	            
+	</footer>
+	</div>
+    <script src="//tbcdn.talentbrew.com/bundles/jquery-client.js"></script>
+	<script src="//tbcdn.talentbrew.com/bundles/tb-corepack.js"></script><span role="status" class="mindreader-status" aria-live="polite" id="search-location-82f87dbe11-mindreader-status"></span><ul class="mindreader-results" id="search-location-82f87dbe11-mindreader"></ul>
+	
+	
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js"></script>
+	
+
+    <script type="text/javascript" src="https://tbcdn.talentbrew.com/company/27326/gst_v1_0/js/css3-animate-it.js"></script>
+
+    <script src="//tbcdn.talentbrew.com/company/27326/js/58298-GST.min.js"></script>
+    <script src="//tbcdn.talentbrew.com/js/client/recently-viewed-job-list.js"></script>
+<script src="//tbcdn.talentbrew.com/js/client/contentFeed.js"></script>
+<script src="//tbcdn.talentbrew.com/js/client/social-share.js"></script>
+<script src="//tbcdn.talentbrew.com/js/client/job-details.js"></script>
+
+
+ 
+    
+    
+    
+	
+
+
+	<!-- Facebook Pixel Code -->
+
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '969623350820095');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+
+      <img height="1" width="1" style="display:none" 
+           src="https://www.facebook.com/tr?id=969623350820095&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+<script id="tmp-consent-banner" data-igdpr="true" data-igdpr-client-name="[client name]" data-igdpr-policy-url="[site policy url]" src="https://tbcdn.talentbrew.com/js/client/consent-banner.js"></script><script id="igdpr-notice-js" src="https://tbcdn.talentbrew.com/js/client/consent/consent.js"></script><iframe id="bugherd_embed_communication_frame" name="embedCommunication" sandbox="allow-scripts allow-popups allow-same-origin allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://sidebar.bugherd.com/sidebar/embed_html?apikey=n3fyf5uhscintqavb2bpwq" style="display: none; border: none; position: fixed; z-index: 2147483647; right: 0px; height: 144px; width: 330px; top: calc(100% - 154px);"></iframe><script id="" text="" charset="" type="text/javascript" src="https://apply.talentbrew.io/trck/27326/t.min.js"></script>
+  <iframe height="0" width="0" style="display: none; visibility: hidden;"></iframe><script id="" text="" charset="" type="text/javascript" src="https://static.survale.com/ext/survey.js"></script><script type="text/javascript" id="" charset="">try{for(var allPageAnchors=document.querySelectorAll("a"),allPageForms=document.querySelectorAll("form"),allPageButtons=document.querySelectorAll("button"),i=0;i<allPageForms.length;i++)allPageForms[i].getAttribute("data-form-type")!=null&&allPageForms[i].getAttribute("data-form-type")=="Talent Community Login"&&allPageForms[i].addEventListener("submit",function(){document.querySelector('input[id^\x3d"form-field-"][id$\x3d"category"]')&&document.querySelector('input[id^\x3d"form-field-"][id$\x3d"category"]');
+document.querySelector('input[id^\x3d"form-field-"][id$\x3d"location"]')&&document.querySelector('input[id^\x3d"form-field-"][id$\x3d"location"]');dataLayer.push({event:"sign_up",component_type:"talent community"})});for(var a=0;a<allPageAnchors.length;a++){/^\/job\//gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"select_item",ecommerce:{items:[{item_id:this.getAttribute("data-job-id")?this.getAttribute("data-job-id"):void 0}]}})});allPageAnchors[a].getAttribute("data-selector-name")&&
+allPageAnchors[a].getAttribute("data-selector-name")=="calloutactionlink"&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"callout_action_click",link_text:this.textContent?this.textContent.trim():void 0,link_url:this.href?this.href:void 0})});allPageAnchors[a].closest('div[data-selector-name\x3d"relatedcontent"]')!=null&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"related_content",link_url:this.href?this.href:void 0,component_type:"related content"})});
+/\/.*?\/.*?-jobs\/.*/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){var b=this.getAttribute("href")&&this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$1")!=""?this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$1"):void 0,c=this.getAttribute("href")&&this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$2")!=""?this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$2"):void 0;b=b!=void 0&&c!=void 0?b+" : "+c:void 0;
+dataLayer.push({event:"job_module_click",link_url:this.href?this.href:void 0,method:b,component_type:"job module click"})});/^mailto:([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})?/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"email_click",link_url:this.href?this.href.replace("mailto:",""):void 0})});/^tel:(.*)$/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"telephone_click",
+link_url:this.href?this.href.replace("tel:",""):void 0})});/(\.doc|\.docx|\.xls|\.xlsx|\.xlsm|\.ppt|\.pptx|\.exe|\.dmg|\.zip|\.pdf|\.js|\.txt|\.csv|\.xml|\.mp3)$/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){var b=this.href.split(".")&&this.href.split(".").length>0?this.href.split(".")[this.href.split(".").length-1]:void 0,c=this.href.split("/")&&this.href.split("/").length>0?this.href.split("/")[this.href.split("/").length-1]:void 0;dataLayer.push({event:"file_download",
+link_url:this.href?this.href:void 0,file_extension:b,file_name:c})});var isSocialLink=function(b){for(var c=["facebook.com","twitter.com","linkedin.com","googleplus.com","tumblr.com"],e=!1,d=0;d<c.length;d++)if((new RegExp(c[d],"ig")).test(b)){e=!0;break}return e},clickHostname=allPageAnchors[a].hostname.toLowerCase().replace("https://","");clickHostname!=null&&window.location.hostname.toLowerCase()!=clickHostname&&isSocialLink(clickHostname)==0&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"outbound",
+link_url:this.href?this.href:void 0})})}}catch(b){console.log("Error | Event Listerner: ",b)};</script><div style="position: fixed; top: 0px; left: 0px; z-index: 999999;"></div> 
+<script type="text/javascript" id="" charset="">talentbrew_pixel.init({category:"talentbrew",conversion_event:"page-view",job_id:"2025-113142"});</script><img width="1" height="1" src="https://analytics.talentbrew.io/i?stm=1757897844300&amp;e=pv&amp;url=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;page=Data%20Scientist%20-%20Platform%20Automation%20and%20Analytics%20%7C%20Schwab%20Jobs&amp;refr=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;eid=7d8873c1-8cb8-4a2d-8ff8-2b9617a6625a&amp;tv=js-4.3.1&amp;tna=charlesschwab-27326-tracker&amp;aid=charlesschwab-27326&amp;p=web&amp;cookie=1&amp;cs=UTF-8&amp;lang=en-US&amp;res=1920x1080&amp;cd=24&amp;tz=America%2FDenver&amp;dtm=1757897844298&amp;vp=1920x911&amp;ds=1905x6159&amp;vid=2&amp;sid=82d8e378-f95b-4289-b76e-cc5f445bfcb1&amp;duid=84f86ce4-e8fa-403a-b126-7fa67424f1b5&amp;f_pdf=1&amp;f_qt=0&amp;f_realp=0&amp;f_wma=0&amp;f_dir=0&amp;f_fla=0&amp;f_java=0&amp;f_gears=0&amp;f_ag=0&amp;cx=eyJzY2hlbWEiOiJpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wIiwiZGF0YSI6W3sic2NoZW1hIjoiaWdsdTpjb20uc25vd3Bsb3dhbmFseXRpY3Muc25vd3Bsb3cvd2ViX3BhZ2UvanNvbnNjaGVtYS8xLTAtMCIsImRhdGEiOnsiaWQiOiI0ZDU1Zjg2MC02OGU0LTQ0MmQtOTBhOC1lM2RkYzFmMDkzZDIifX1dfQ">
+  <script type="text/javascript" id="" charset="">com_survale.init(1650332311E3);</script>
+  <div><div id="survale_SurveyDiv" class="survaleDialogClass" style="width:450px;min-height:300px;display:none;padding:0 15px;margin: 0 auto;"><br>   <a id="survale_SurveyAnchor" href="https://s.survale.com/3557?a=b&amp;compact=true&amp;width=450"></a></div></div><div><div id="survaleSideImageAnchorImgWrap" class="survale-may-animate" style="position: fixed;right: 0;cursor:pointer;background-color:transparent;z-index: 300;font-size: 12px"><button id="survaleSideImageAnchor" style="border-radius: 0px; background: none transparent; min-height: 207px; border: none; top: 50%; position: fixed; width: 60px;" class="right"><img id="survaleSideImageAnchorImg" style="height: auto; width: 60px; min-width: 60px; max-width: 60px;" src="https://static.survale.com/image-uploads/0e0f4770-c5a9-11ec-aba4-2f5dcb05d41e-CandidateFeebackButton_Schwab_009DDB.png" alt="Candidate Feedback"></button></div></div><div><dialog id="survale-survey-dialog" aria-label="Candidate Experience Survey" class="compact"> 
+      <button id="survale-survey-dialog-close" aria-label="close"></button>
+      <div id="survale-loading-message">Loading ...  </div> 
+      <iframe id="survale-survey-iframe" title="Survey Form" src=""></iframe>
+    </dialog></div><div id="batBeacon725649445272" style="width: 0px; height: 0px; display: none; visibility: hidden;"><img id="batBeacon878240137578" width="0" height="0" alt="" src="https://bat.bing.com/action/0?ti=259120311&amp;tm=gtm002&amp;Ver=2&amp;mid=e4cb1b98-6985-40c5-b246-cafc39c94b3f&amp;bo=1&amp;sid=076db4e091c511f0a6c76d5cc69dad17&amp;vid=076dbc0091c511f095c3eb9fcaac404c&amp;vids=0&amp;msclkid=N&amp;uach=pv%3D19.0.0&amp;pi=918639831&amp;lg=en-US&amp;sw=1920&amp;sh=1080&amp;sc=24&amp;tl=Data%20Scientist%20-%20Platform%20Automation%20and%20Analytics%20%7C%20Schwab%20Jobs&amp;p=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;r=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;lt=925&amp;evt=pageLoad&amp;sv=2&amp;cdb=ARoR&amp;rn=447614" style="width: 0px; height: 0px; display: none; visibility: hidden;"></div><iframe id="_hjSafeContext_49453195" title="_hjSafeContext" tabindex="-1" aria-hidden="true" src="about:blank" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe><img width="1" height="1" src="https://analytics.talentbrew.io/i?stm=1757897844635&amp;e=se&amp;se_ca=talentbrew&amp;se_ac=page-view&amp;se_la=2025-113142&amp;se_pr=1&amp;se_va=10.0&amp;eid=b10fb18d-da9c-4125-adee-f76d9b0b8190&amp;tv=js-4.3.1&amp;tna=charlesschwab-27326-tracker&amp;aid=charlesschwab-27326&amp;p=web&amp;cookie=1&amp;cs=UTF-8&amp;lang=en-US&amp;res=1920x1080&amp;cd=24&amp;tz=America%2FDenver&amp;dtm=1757897844299&amp;vp=1920x911&amp;ds=1905x6159&amp;vid=2&amp;sid=82d8e378-f95b-4289-b76e-cc5f445bfcb1&amp;duid=84f86ce4-e8fa-403a-b126-7fa67424f1b5&amp;refr=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;url=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632&amp;f_pdf=1&amp;f_qt=0&amp;f_realp=0&amp;f_wma=0&amp;f_dir=0&amp;f_fla=0&amp;f_java=0&amp;f_gears=0&amp;f_ag=0&amp;cx=eyJzY2hlbWEiOiJpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wIiwiZGF0YSI6W3sic2NoZW1hIjoiaWdsdTpjb20uc25vd3Bsb3dhbmFseXRpY3Muc25vd3Bsb3cvd2ViX3BhZ2UvanNvbnNjaGVtYS8xLTAtMCIsImRhdGEiOnsiaWQiOiI0ZDU1Zjg2MC02OGU0LTQ0MmQtOTBhOC1lM2RkYzFmMDkzZDIifX1dfQ"><iframe height="0" width="0" src="https://10209211.fls.doubleclick.net/activityi;src=10209211;type=talen0;cat=talen000;ord=1;num=4368661966767;npa=0;auiddc=738210396.1757893586;gclgs=1;gclst=4265787;gcllp=42865191;gclaw=CjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE;gac=UA-164218278-1%3ACjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE;u8=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632;u9=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632;u10=undefined;u11=JobDetails;u12=Data%20Scientist%20-%20Platform%20Automation%20and%20Analytics;u13=undefined;u14=Lone%20Tree~Colorado~United%20States%7CWestlake~Texas~United%20States%7CAustin~Texas~United%20States%7COmaha~Nebraska~United%20States;u15=Data%20Analytics%20and%20Strategy;u16=undefined;u17=33727%2CCharles%20Schwab;u18=33727;u19=2025-113142;u20=84170447632;u21=06abd146-5c54-14be-8bb2-1dd92870ba8c;u22=26fcebb5-6118-3ba9-1006-0e0391aaa2b1;u23=1757893585586;u24=undefined;u25=9%2F12%2F2025;u26=27326;u27=4417;u28=58298;u29=true;u30=en;uaa=x86;uab=64;uafvl=Chromium%3B140.0.7339.128%7CNot%253DA%253FBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B140.0.7339.128;uamb=0;uam=;uap=Windows;uapv=19.0.0;uaw=0;pscdl=noapi;frm=0;_ng=1;_tu=KJA;gtm=45fe59a1v9190873747z8831179614za200zb831179614zd831179614xea;gcd=13l3l3l3l1l1;dma=0;dc_fmt=2;tag_exp=101509157~103116026~103200004~103233427~104527907~104528500~104684208~104684211~104948813~105367987~105367989~105426769~105426771~115480710~115688283~115688285;epver=2;dc_random=hYs4mHymIAE_PaoAxcAI_xnHBRgRU60foA;_dc_test=1;~oref=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632?" style="display: none; visibility: hidden;"></iframe><iframe height="0" width="0" src="https://10209211.fls.doubleclick.net/activityi;src=10209211;type=talen0;cat=talen0;ord=8517418448520;npa=0;auiddc=738210396.1757893586;gclgs=1;gclst=4265792;gcllp=42865191;gclaw=CjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE;gac=UA-164218278-1%3ACjwKCAjwz5nGBhBBEiwA-W6XROOP5O5J3QZe5p4S5SpU6x_IIcaDfWGqjVk--dcefikTzBzStKEkZxoCvjcQAvD_BwE;u8=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632;u9=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632;u10=undefined;u11=JobDetails;u12=Data%20Scientist%20-%20Platform%20Automation%20and%20Analytics;u13=undefined;u14=Lone%20Tree~Colorado~United%20States%7CWestlake~Texas~United%20States%7CAustin~Texas~United%20States%7COmaha~Nebraska~United%20States;u15=Data%20Analytics%20and%20Strategy;u16=undefined;u17=33727%2CCharles%20Schwab;u18=33727;u19=2025-113142;u20=84170447632;u21=06abd146-5c54-14be-8bb2-1dd92870ba8c;u22=26fcebb5-6118-3ba9-1006-0e0391aaa2b1;u23=1757893585586;u24=undefined;u25=9%2F12%2F2025;u26=27326;u27=4417;u28=58298;u30=en;u29=true;uaa=x86;uab=64;uafvl=Chromium%3B140.0.7339.128%7CNot%253DA%253FBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B140.0.7339.128;uamb=0;uam=;uap=Windows;uapv=19.0.0;uaw=0;pscdl=noapi;frm=0;_ng=1;_tu=KFA;gtm=45fe59a1v9190873747z8831179614za200zb831179614zd831179614xea;gcd=13l3l3l3l1l1;dma=0;dc_fmt=2;tag_exp=101509157~103116026~103200004~103233427~104527907~104528500~104684208~104684211~104948813~105367987~105367989~105426769~105426771~115480710~115688283~115688285;epver=2;dc_random=GH734jUabZVSyf_5EPRj7iHv0VI39he1EQ;_dc_test=1;~oref=https%3A%2F%2Fwww.schwabjobs.com%2Fjob%2Flone-tree%2Fdata-scientist-platform-automation-and-analytics%2F33727%2F84170447632?" style="display: none; visibility: hidden;"></iframe><script type="text/javascript" id="" charset="">try{for(var allPageAnchors=document.querySelectorAll("a"),allPageForms=document.querySelectorAll("form"),allPageButtons=document.querySelectorAll("button"),i=0;i<allPageForms.length;i++)allPageForms[i].getAttribute("data-form-type")!=null&&allPageForms[i].getAttribute("data-form-type")=="Talent Community Login"&&allPageForms[i].addEventListener("submit",function(){document.querySelector('input[id^\x3d"form-field-"][id$\x3d"category"]')&&document.querySelector('input[id^\x3d"form-field-"][id$\x3d"category"]');
+document.querySelector('input[id^\x3d"form-field-"][id$\x3d"location"]')&&document.querySelector('input[id^\x3d"form-field-"][id$\x3d"location"]');dataLayer.push({event:"sign_up",component_type:"talent community"})});for(var a=0;a<allPageAnchors.length;a++){/^\/job\//gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"select_item",ecommerce:{items:[{item_id:this.getAttribute("data-job-id")?this.getAttribute("data-job-id"):void 0}]}})});allPageAnchors[a].getAttribute("data-selector-name")&&
+allPageAnchors[a].getAttribute("data-selector-name")=="calloutactionlink"&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"callout_action_click",link_text:this.textContent?this.textContent.trim():void 0,link_url:this.href?this.href:void 0})});allPageAnchors[a].closest('div[data-selector-name\x3d"relatedcontent"]')!=null&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"related_content",link_url:this.href?this.href:void 0,component_type:"related content"})});
+/\/.*?\/.*?-jobs\/.*/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){var b=this.getAttribute("href")&&this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$1")!=""?this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$1"):void 0,c=this.getAttribute("href")&&this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$2")!=""?this.getAttribute("href").replace(/\/(.*?)\/(.*?)-jobs\/.*/gi,"$2"):void 0;b=b!=void 0&&c!=void 0?b+" : "+c:void 0;
+dataLayer.push({event:"job_module_click",link_url:this.href?this.href:void 0,method:b,component_type:"job module click"})});/^mailto:([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})?/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"email_click",link_url:this.href?this.href.replace("mailto:",""):void 0})});/^tel:(.*)$/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"telephone_click",
+link_url:this.href?this.href.replace("tel:",""):void 0})});/(\.doc|\.docx|\.xls|\.xlsx|\.xlsm|\.ppt|\.pptx|\.exe|\.dmg|\.zip|\.pdf|\.js|\.txt|\.csv|\.xml|\.mp3)$/gi.test(allPageAnchors[a].href)&&allPageAnchors[a].addEventListener("click",function(){var b=this.href.split(".")&&this.href.split(".").length>0?this.href.split(".")[this.href.split(".").length-1]:void 0,c=this.href.split("/")&&this.href.split("/").length>0?this.href.split("/")[this.href.split("/").length-1]:void 0;dataLayer.push({event:"file_download",
+link_url:this.href?this.href:void 0,file_extension:b,file_name:c})});var isSocialLink=function(b){for(var c=["facebook.com","twitter.com","linkedin.com","googleplus.com","tumblr.com"],e=!1,d=0;d<c.length;d++)if((new RegExp(c[d],"ig")).test(b)){e=!0;break}return e},clickHostname=allPageAnchors[a].hostname.toLowerCase().replace("https://","");clickHostname!=null&&window.location.hostname.toLowerCase()!=clickHostname&&isSocialLink(clickHostname)==0&&allPageAnchors[a].addEventListener("click",function(){dataLayer.push({event:"outbound",
+link_url:this.href?this.href:void 0})})}}catch(b){console.log("Error | Event Listerner: ",b)};</script>
+'mf-URL: https://www.schwabjobs.com/job/lone-tree/data-scientist-platform-automation-and-analytics/33727/84170447632

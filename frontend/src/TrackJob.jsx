@@ -10,10 +10,38 @@ function TrackJob() {
   const [isEditing, setIsEditing] = useState(false)
   const [editedJob, setEditedJob] = useState(null)
   const [platform, setPlatform] = useState('linkedin')
+  const [extractedUrl, setExtractedUrl] = useState('')
+
+  // Function to detect mf-URL at bottom of job text and extract the URL
+  const detectMfUrl = (text) => {
+    const mfUrlMatch = text.match(/mf-URL:\s*([^\s]+)/i)
+    
+    if (mfUrlMatch) {
+      const url = mfUrlMatch[1].trim()
+      setExtractedUrl(url)
+      
+      // Auto-switch to greenhouse if URL contains job-boards.greenhouse.io
+      if (url.includes('job-boards.greenhouse.io')) {
+        setPlatform('greenhouse')
+      }
+      if (url.includes('myworkdayjobs.com')) {
+        setPlatform('workday')
+      }
+      
+      return url
+    }
+    
+    setExtractedUrl('')
+    return null
+  }
+
+  const handleJobTextChange = (e) => {
+    const newText = e.target.value
+    setJobText(newText)
+    detectMfUrl(newText)
+  }
 
   const handleTrackJob = async () => {
-    console.log("Button clicked!")
-    console.log("Job text:", jobText)
 
     if (!jobText.trim()) {
       alert("Please enter job application text")
@@ -32,7 +60,7 @@ function TrackJob() {
       setParsedJob(jobApp)
       setEditedJob(jobApp) // Initialize edited job with parsed data
       setJobText('')
-      setNotes('') // Reset notes when parsing new job
+      setNotes(jobApp.notes || '') // Initialize notes with parsed job notes
       setIsEditing(false) // Reset editing state
     } catch (error) {
       console.error("Error calling Go function:", error)
@@ -104,15 +132,34 @@ function TrackJob() {
           >
             <option value="linkedin" style={{ background: '#333', color: 'white' }}>LinkedIn</option>
             <option value="greenhouse" style={{ background: '#333', color: 'white' }}>Greenhouse</option>
+            <option value="workday" style={{ background: '#333', color: 'white' }}>Workday</option>
+            <option value="other" style={{ background: '#333', color: 'white' }}>Other</option>
           </select>
         </div>
         
         <textarea
           value={jobText}
-          onChange={(e) => setJobText(e.target.value)}
-          placeholder={`Enter a job application from ${platform === 'linkedin' ? 'LinkedIn' : 'Greenhouse'}...`}
+          onChange={handleJobTextChange}
+          placeholder={`Enter a job application from ${platform === 'linkedin' ? 'LinkedIn' : platform === 'greenhouse' ? 'Greenhouse' : 'Other'}...`}
           disabled={isLoading}
         />
+        {extractedUrl && (
+          <div style={{ 
+            marginTop: '10px', 
+            padding: '10px', 
+            background: 'rgba(76, 175, 80, 0.2)', 
+            borderRadius: '5px',
+            border: '1px solid rgba(76, 175, 80, 0.5)',
+            color: '#4CAF50'
+          }}>
+            <strong>✓ URL detected:</strong> {extractedUrl}
+            {platform === 'greenhouse' && (
+              <div style={{ marginTop: '5px', fontSize: '14px' }}>
+                <em>Platform automatically switched to Greenhouse</em>
+              </div>
+            )}
+          </div>
+        )}
         <button
           onClick={handleTrackJob}
           disabled={isLoading || !jobText.trim()}

@@ -344,3 +344,150 @@ func TestParseLinkedInJob(t *testing.T) {
 	t.Logf("  Location: %s", result.Location)
 	t.Logf("  Workplace Type: %s", result.WorkplaceType)
 }
+
+func TestParseWorkdayJob(t *testing.T) {
+	// Read the test HTML data from scratch6.txt (in project root)
+	testData, err := os.ReadFile("../../scratch6.txt")
+	if err != nil {
+		t.Fatalf("Failed to read test data: %v", err)
+	}
+
+	// Convert to lines as the function expects
+	lines := strings.Split(string(testData), "\n")
+
+	// Create a new JobApplication instance
+	jobApp := &models.JobApplication{}
+
+	// Test the parsing function
+	result, err := ParseWorkdayJob(lines, jobApp)
+	if err != nil {
+		t.Fatalf("ParseWorkdayJob failed: %v", err)
+	}
+
+	// Test 1: Job title extraction
+	expectedPosition := "Sr. Software Engineer - Applied AI (REMOTE)"
+	if result.Position != expectedPosition {
+		t.Errorf("Expected position '%s', got '%s'", expectedPosition, result.Position)
+	}
+
+	// Test 2: Location extraction (should contain multiple locations joined with newlines)
+	expectedLocations := []string{"Chevy Chase, MD", "Appleton, WI", "Bainbridge, GA", "Austell, GA", "Auburn, AL"}
+	for _, expectedLoc := range expectedLocations {
+		if !strings.Contains(result.Location, expectedLoc) {
+			t.Errorf("Expected location to contain '%s', got '%s'", expectedLoc, result.Location)
+		}
+	}
+
+	// Test 3: Job type/time extraction
+	expectedWorkplaceType := "Full time"
+	if result.WorkplaceType != expectedWorkplaceType {
+		t.Errorf("Expected workplace type '%s', got '%s'", expectedWorkplaceType, result.WorkplaceType)
+	}
+
+	// Test 4: Salary extraction
+	if !strings.Contains(result.SalaryRange, "80,000") || !strings.Contains(result.SalaryRange, "215,000") {
+		t.Errorf("Expected salary range to contain '$80,000 - $215,000', got '%s'", result.SalaryRange)
+	}
+
+	// Test 5: URL extraction in notes
+	expectedURL := "https://geico.wd1.myworkdayjobs.com/External/job/Chevy-Chase-MD/Sr-Software-Engineer---Applied-AI--REMOTE-_R0058772?source=LinkedIn"
+	if !strings.Contains(result.Notes, expectedURL) {
+		t.Errorf("Expected URL to be extracted in notes, got: %s", result.Notes)
+	}
+
+	// Test 6: Status should be set to SUBMITTED
+	if result.Status != models.SUBMITTED {
+		t.Errorf("Expected status to be SUBMITTED, got %s", result.Status)
+	}
+
+	// Test 7: DateApplied should be set to today
+	today := time.Now().Format("2006-01-02")
+	appliedDate := result.DateApplied.Time.Format("2006-01-02")
+	if appliedDate != today {
+		t.Errorf("Expected date applied to be today (%s), got %s", today, appliedDate)
+	}
+
+	// Print all extracted data for manual verification
+	t.Logf("Extracted Workday Job Application:")
+	t.Logf("  Position: %s", result.Position)
+	t.Logf("  Location: %s", result.Location)
+	t.Logf("  Workplace Type: %s", result.WorkplaceType)
+	t.Logf("  Salary Range: %s", result.SalaryRange)
+	t.Logf("  Status: %s", result.Status)
+	t.Logf("  Date Applied: %s", result.DateApplied.Time.Format("2006-01-02"))
+	t.Logf("  Notes: %s", result.Notes)
+}
+
+func TestParseWorkdayJob2(t *testing.T) {
+	// Read the test HTML data from scratch7.txt (in project root)
+	testData, err := os.ReadFile("../../scratch7.txt")
+	if err != nil {
+		t.Fatalf("Failed to read test data: %v", err)
+	}
+
+	// Convert to lines as the function expects
+	lines := strings.Split(string(testData), "\n")
+
+	// Create a new JobApplication instance
+	jobApp := &models.JobApplication{}
+
+	// Test the parsing function
+	result, err := ParseWorkdayJob(lines, jobApp)
+	if err != nil {
+		t.Fatalf("ParseWorkdayJob failed: %v", err)
+	}
+
+	// Test 1: Job title extraction
+	expectedPosition := "Senior Software Engineer (Hybrid)"
+	if result.Position != expectedPosition {
+		t.Errorf("Expected position '%s', got '%s'", expectedPosition, result.Position)
+	}
+
+	// Test 2: Location extraction (should contain multiple locations joined with newlines)
+	expectedLocations := []string{"Cedar Rapids, Iowa", "Denver, Colorado", "Philadelphia, Pennsylvania" }
+
+	for _, expectedLoc := range expectedLocations {
+		if !strings.Contains(result.Location, expectedLoc) {
+			t.Errorf("Expected location to contain '%s', got '%s'", expectedLoc, result.Location)
+		} 
+	}
+
+	// Test 3: Job type/time extraction
+	expectedWorkplaceType := "Full time"
+	if result.WorkplaceType != expectedWorkplaceType {
+		t.Errorf("Expected workplace type '%s', got '%s'", expectedWorkplaceType, result.WorkplaceType)
+	}
+
+	// Test 4: Salary extraction
+	if !strings.Contains(result.SalaryRange, "90,000") || !strings.Contains(result.SalaryRange, "110,000") {
+		t.Errorf("Expected salary range to contain '$80,000 - $110,000', got '%s'", result.SalaryRange)
+	}
+
+	// Test 5: URL extraction in notes
+	expectedURL := "https://transamerica.wd5.myworkdayjobs.com/en-US/US/job/Cedar-Rapids-Iowa/Senior-Software-Engineer_R20059151?source=web_LinkedIn"
+	if !strings.Contains(result.Notes, expectedURL) {
+		t.Errorf("Expected URL to be extracted in notes, got: %s", result.Notes)
+	}
+
+	// Test 6: Status should be set to SUBMITTED
+	if result.Status != models.SUBMITTED {
+		t.Errorf("Expected status to be SUBMITTED, got %s", result.Status)
+	}
+
+	// Test 7: DateApplied should be set to today
+	today := time.Now().Format("2006-01-02")
+	appliedDate := result.DateApplied.Time.Format("2006-01-02")
+	if appliedDate != today {
+		t.Errorf("Expected date applied to be today (%s), got %s", today, appliedDate)
+	}
+
+	// Print all extracted data for manual verification
+	t.Logf("Extracted Workday Job Application (scratch7.txt):")
+	t.Logf("  Position: %s", result.Position)
+	t.Logf("  Location: %s", result.Location)
+	t.Logf("  Workplace Type: %s", result.WorkplaceType)
+	t.Logf("  Salary Range: %s", result.SalaryRange)
+	t.Logf("  Status: %s", result.Status)
+	t.Logf("  Date Applied: %s", result.DateApplied.Time.Format("2006-01-02"))
+	t.Logf("  Notes: %s", result.Notes)
+}

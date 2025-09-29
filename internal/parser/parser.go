@@ -14,11 +14,8 @@ func ParseGreenhouseJob(lines []string, jobApp *models.JobApplication) (*models.
 	// Join all lines into a single HTML string
 	htmlContent := strings.Join(lines, "\n")
 
-	// 1. Extract job title from <div class="job__title"><h1>
-	titlePattern := regexp.MustCompile(`(?s)<div[^>]*class="[^"]*job__title[^"]*"[^>]*>.*?<h1[^>]*>(.*?)</h1>`)
-	if titleMatch := titlePattern.FindStringSubmatch(htmlContent); len(titleMatch) > 1 {
-		jobApp.Position = strings.TrimSpace(CleanHTMLTags(titleMatch[1]))
-	}
+	// 1. Extract job title
+	extractJobTitle(htmlContent, jobApp)
 
 	// 2. Extract location from <div class="job__location"><div>
 	locationPattern := regexp.MustCompile(`(?s)<div[^>]*class="[^"]*job__location[^"]*"[^>]*>.*?<div[^>]*>(.*?)</div>`)
@@ -48,14 +45,22 @@ func ParseGreenhouseJob(lines []string, jobApp *models.JobApplication) (*models.
 		jobApp.SalaryRange = strings.Join(salaryRanges, ", ")
 	}
 
-	// 4. Extract URL from "mf-URL:" pattern
+	// 4. Extract URL from "mf-URL:" pattern and extract company name
 	urlPattern := regexp.MustCompile(`mf-URL:\s*(.+)`)
 	if urlMatch := urlPattern.FindStringSubmatch(htmlContent); len(urlMatch) > 1 {
-		// Store URL in a field if you have one, or add to notes
+		url := strings.TrimSpace(urlMatch[1])
+
+		// Extract company name from Greenhouse URL pattern: https://job-boards.greenhouse.io/company/jobs/
+		companyPattern := regexp.MustCompile(`https?://job-boards\.greenhouse\.io/([^/]+)/`)
+		if companyMatch := companyPattern.FindStringSubmatch(url); len(companyMatch) > 1 {
+			jobApp.Company = strings.TrimSpace(companyMatch[1])
+		}
+
+		// Store URL in notes
 		if jobApp.Notes == "" {
-			jobApp.Notes = fmt.Sprintf("Source URL: %s", strings.TrimSpace(urlMatch[1]))
+			jobApp.Notes = fmt.Sprintf("Source URL: %s", url)
 		} else {
-			jobApp.Notes += fmt.Sprintf("\nSource URL: %s", strings.TrimSpace(urlMatch[1]))
+			jobApp.Notes += fmt.Sprintf("\nSource URL: %s", url)
 		}
 	}
 
@@ -70,6 +75,15 @@ func ParseGreenhouseJob(lines []string, jobApp *models.JobApplication) (*models.
 	jobApp.DateApplied = models.DateOnly{Time: time.Now()}
 
 	return jobApp, nil
+}
+
+// extractJobTitle extracts job title from Greenhouse HTML content
+func extractJobTitle(htmlContent string, jobApp *models.JobApplication) {
+	// Try multiple possible CSS classes: job__title, job_description_title, job-description__title
+	titlePattern := regexp.MustCompile(`(?s)<div[^>]*class="[^"]*(?:job__title|job_description_title|job-description__title)[^"]*"[^>]*>.*?<h1[^>]*>(.*?)</h1>`)
+	if titleMatch := titlePattern.FindStringSubmatch(htmlContent); len(titleMatch) > 1 {
+		jobApp.Position = strings.TrimSpace(CleanHTMLTags(titleMatch[1]))
+	}
 }
 
 // CleanHTMLTags removes HTML tags and decodes entities
@@ -127,6 +141,89 @@ func ParseLinkedInJob(lines []string, jobApp *models.JobApplication) (*models.Jo
 			}
 		}
 	}
+	jobApp.Status = models.SUBMITTED
+	jobApp.DateApplied = models.DateOnly{Time: time.Now()}
+
+	return jobApp, nil
+}
+
+// ParseWorkdayJob extracts job data from Workday HTML content
+func ParseWorkdayJob(lines []string, jobApp *models.JobApplication) (*models.JobApplication, error) {
+	// Join all lines into a single HTML string
+	htmlContent := strings.Join(lines, "\n")
+
+	// 1. Extract job title from <h2 data-automation-id="jobPostingHeader">
+	titlePattern := regexp.MustCompile(`(?s)<h2[^>]*data-automation-id="jobPostingHeader"[^>]*>(.*?)</h2>`)
+	if titleMatch := titlePattern.FindStringSubmatch(htmlContent); len(titleMatch) > 1 {
+		jobApp.Position = strings.TrimSpace(CleanHTMLTags(titleMatch[1]))
+	}
+
+	// 2. Extract locations from <div data-automation-id="locations"> and get all <dd> elements
+	locationSectionPattern := regexp.MustCompile(`(?s)<div[^>]*data-automation-id="locations"[^>]*>.*?<dl[^>]*>(.*?)</dl>`)
+	if locationMatch := locationSectionPattern.FindStringSubmatch(htmlContent); len(locationMatch) > 1 {
+		ddPattern := regexp.MustCompile(`(?s)<dd[^>]*>(.*?)</dd>`)
+		ddMatches := ddPattern.FindAllStringSubmatch(locationMatch[1], -1)
+		var locations []string
+		for _, match := range ddMatches {
+			if len(match) > 1 {
+				location := strings.TrimSpace(CleanHTMLTags(match[1]))
+				if location != "" && location != "Remote" && len(locations) < 10 { // Take first 10 locations
+					locations = append(locations, location)
+				}
+			}
+		}
+		if len(locations) > 0 {
+			jobApp.Location = strings.Join(locations, "\n")
+		}
+	}
+
+	// 3. Extract job type from <div data-automation-id="time"> and get all <dd> elements
+	timePattern := regexp.MustCompile(`(?s)<div[^>]*data-automation-id="time"[^>]*>.*?<dl[^>]*>.*?<dd[^>]*>(.*?)</dd>`)
+	if timeMatch := timePattern.FindStringSubmatch(htmlContent); len(timeMatch) > 1 {
+		jobApp.WorkplaceType = strings.TrimSpace(CleanHTMLTags(timeMatch[1]))
+	}
+
+	// 4. Extract salary patterns like $100,000 - $150,000 or $100,000.00 - $150,000.00
+	salaryPattern := regexp.MustCompile(`\$(\d+(?:,\d{3})*)(?:\.\d{2})?\s*-\s*\$(\d+(?:,\d{3})*)(?:\.\d{2})?`)
+	salaryMatches := salaryPattern.FindAllStringSubmatch(htmlContent, -1)
+	var salaryRanges []string
+	for _, match := range salaryMatches {
+		if len(match) >= 3 {
+			salaryRanges = append(salaryRanges, fmt.Sprintf("$%s - $%s", match[1], match[2]))
+		}
+	}
+
+	salaryPattern2 := regexp.MustCompile(`\$(\d+(?:,\d{3})*)(?:\.\d{2})?\s+to\s+\$(\d+(?:,\d{3})*)(?:\.\d{2})?`)
+	salaryMatches2 := salaryPattern2.FindAllStringSubmatch(htmlContent, -1)
+	for _, match := range salaryMatches2 {
+		if len(match) >= 3 {
+			salaryRanges = append(salaryRanges, fmt.Sprintf("$%s - $%s", match[1], match[2]))
+		}
+	}
+
+	if len(salaryRanges) > 0 {
+		jobApp.SalaryRange = strings.Join(salaryRanges, ", ")
+	}
+
+	// 5. Extract URL from "mf-URL:" pattern and extract company name
+	urlPattern := regexp.MustCompile(`mf-URL:\s*(.+)`)
+	if urlMatch := urlPattern.FindStringSubmatch(htmlContent); len(urlMatch) > 1 {
+		url := strings.TrimSpace(urlMatch[1])
+
+		// Extract company name from Workday URL pattern: https://company.wd#.myworkdayjobs.com/
+		companyPattern := regexp.MustCompile(`https?://([^.]+)\.wd\d+\.myworkdayjobs\.com`)
+		if companyMatch := companyPattern.FindStringSubmatch(url); len(companyMatch) > 1 {
+			jobApp.Company = strings.TrimSpace(companyMatch[1])
+		}
+
+		// Store URL in notes
+		if jobApp.Notes == "" {
+			jobApp.Notes = fmt.Sprintf("Source URL: %s", url)
+		} else {
+			jobApp.Notes += fmt.Sprintf("\nSource URL: %s", url)
+		}
+	}
+
 	jobApp.Status = models.SUBMITTED
 	jobApp.DateApplied = models.DateOnly{Time: time.Now()}
 
