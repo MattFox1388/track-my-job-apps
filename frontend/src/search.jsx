@@ -3,14 +3,13 @@ import './search.css'
 import EditModal from './editModal'
 
 const SearchType = Object.freeze({
-    COMPANY: 'company',
-    POSITION: 'position',
     FULL_TEXT: 'full text',
+    COMPANY: 'company'
 })
 
 function Search() {
     const [searchTerm, setSearchTerm] = useState('')
-    const [searchType, setSearchType] = useState(SearchType.COMPANY)
+    const [searchType, setSearchType] = useState(SearchType.FULL_TEXT)
     const [results, setResults] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [totalCount, setTotalCount] = useState(0)
@@ -18,25 +17,36 @@ function Search() {
 
     useEffect(() => {
         const fetchResults = async () => {
-            const results = await window.go.main.App.GetAllJobApps()
-            console.log(results)
-            // get last 20 results
-            setResults(results)
+            // const results = await window.go.main.App.GetAllJobApps()
+            // // get last 20 results
+            // setResults(results || [])
+            handleSearch()
             
             // Get total count from database
             const count = await window.go.main.App.GetJobAppCount()
             setTotalCount(count)
         }
         fetchResults()
-    }, [])
+    }, [editingJobApp])
 
     const handleSearch = async () => {
         setIsLoading(true)
         try {
-            const results = await window.go.main.App.SearchByCompany(searchTerm)
-            setResults(results)
+            if (searchTerm.trim() === '') {
+                const newResults = await window.go.main.App.GetAllJobApps()
+                setResults(newResults || [])
+                return
+            }
+            if (searchType === SearchType.COMPANY) {
+                const newResults = await window.go.main.App.SearchByCompany(searchTerm)
+                setResults(newResults || [])
+            } else {
+                const newResults = await window.go.main.App.SearchByFullText(searchTerm)
+                setResults(newResults || [])
+            }
         } catch (error) {
             console.error("Error searching:", error)
+            setResults([])
         } finally {
             setIsLoading(false)
         }
@@ -73,7 +83,7 @@ function Search() {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={handleKeyPress}
-                                placeholder="Enter company name..."
+                                placeholder="Enter search term..."
                                 className="search-input"
                                 disabled={isLoading}
                             />
@@ -93,9 +103,8 @@ function Search() {
                                 onChange={(e) => setSearchType(e.target.value)}
                                 className="search-select"
                             >
-                                <option value={SearchType.COMPANY}>Company</option>
-                                <option value={SearchType.POSITION}>Position</option>
                                 <option value={SearchType.FULL_TEXT}>Full Text</option>
+                                <option value={SearchType.COMPANY}>Company</option>
                             </select>
                         </div>
                     </div>

@@ -6,6 +6,8 @@ import (
 	"log"
 	"strings"
 
+	"github.com/joho/godotenv"
+
 	"track-my-job-apps/internal/backup"
 	"track-my-job-apps/internal/database"
 	"track-my-job-apps/internal/models"
@@ -27,6 +29,11 @@ func NewApp() *App {
 // initialize the application.
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+
+	// Load environment variables
+	if err := godotenv.Load(); err != nil {
+		log.Printf("Warning: Failed to load .env file: %v", err)
+	}
 
 	// Check if database exists
 	dbExists := database.DatabaseExists()
@@ -55,6 +62,14 @@ func (a *App) startup(ctx context.Context) {
 	// Initialize database
 	if err := database.InitDatabase(); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
+	}
+
+	// Initialize Turso database connection
+	if err := database.InitTurso(); err != nil {
+		log.Printf("Warning: Failed to initialize Turso database: %v", err)
+		log.Println("Turso features will be unavailable. Set TURSO_DATABASE_URL and TURSO_AUTH_TOKEN env vars.")
+	} else {
+		log.Println("Turso database initialized successfully")
 	}
 }
 
@@ -87,7 +102,7 @@ func (a *App) SaveJobApp(jobApp *models.JobApplication) error {
 	return nil
 }
 
-func (a * App) UpdateJobApp(jobApp *models.JobApplication) error {
+func (a *App) UpdateJobApp(jobApp *models.JobApplication) error {
 	if err := database.UpdateApp(jobApp); err != nil {
 		fmt.Printf("Error updating job app: %v\n", err)
 		return err
@@ -108,9 +123,21 @@ func (a *App) GetAllJobApps() ([]models.JobApplication, error) {
 }
 
 func (a *App) SearchByCompany(companyName string) ([]models.JobApplication, error) {
-	apps, err := database.SearchByCompany(companyName)
+	fmt.Printf("Searching by company: %s\n", companyName)
+	apps, err := database.SearchByCompany(strings.ToLower(companyName))
 	if err != nil {
 		fmt.Printf("Error searching by company: %v\n", err)
+		return nil, err
+	}
+	fmt.Printf("Found %d job applications for company: %s\n", len(apps), companyName)
+	return apps, nil
+}
+
+func (a *App) SearchByFullText(query string) ([]models.JobApplication, error) {
+	fmt.Printf("Searching by full text: %s\n", query)
+	apps, err := database.SearchByFullText(strings.ToLower(query))
+	if err != nil {
+		fmt.Printf("Error searching by full text: %v\n", err)
 		return nil, err
 	}
 	return apps, nil
@@ -161,4 +188,54 @@ func (a *App) TestBackup() error {
 	}
 	log.Println("Backup test successful!")
 	return nil
+}
+
+// GetRecentPostingsWithQualifications fetches recent job postings with qualifications from Turso
+func (a *App) GetRecentPostingsWithQualifications() ([]map[string]interface{}, error) {
+	// query := `
+	// 	SELECT p.id, p.link, p.descrip, p.postedDate, p.companyName, p.reviewOutput, q.qualification_text 
+	// 	FROM postings p
+	// 	JOIN qualifications q ON q.postings_id = p.id
+	// 	ORDER BY p.ingestDate DESC
+	// 	LIMIT 100
+	// `
+
+	query := `
+		SELECT
+		p.id,
+		p.link,
+		p.descrip,
+		p.postedDate,
+		p.companyName,
+		p.reviewOutput,
+		json_group_array(q.qualification_text) AS qualifications
+		FROM postings p
+		LEFT JOIN qualifications q
+		ON p.id = q.postings_id
+		GROUP BY p.id, p.descrip
+		ORDER BY p.ingestDate DESC
+		LIMIT 100;
+	`
+
+	log.Println("Fetching recent postings with qualifications from Turso...")
+	results, err := database.ExecuteTursoSQL(query)
+	if err != nil {
+		log.Printf("Failed to fetch postings: %v", err)
+		return nil, err
+	}
+
+	log.Printf("Retrieved %d postings", len(results))
+
+	// Print first few results for debugging
+	for i, row := range results {
+		if i >= 10 { // Only print first 3 rows to avoid spam
+			break
+		}
+		log.Printf("Row %d:", i)
+		for key, value := range row {
+			log.Printf("  %s: %v", key, value)
+		}
+	}
+
+	return results, nil
 }

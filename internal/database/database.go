@@ -26,10 +26,15 @@ func InitDatabase() error {
 	var err error
 
 	// Open SQLite database with pure Go driver
-	sqlDB, err := sql.Open("sqlite", "job_apps.db?_pragma=foreign_keys(1)")
+	sqlDB, err := sql.Open("sqlite", "job_apps.db?_pragma=foreign_keys(1)&_busy_timeout=5000")
 	if err != nil {
 		return fmt.Errorf("failed to open database: %v", err)
 	}
+
+	// Configure connection pool to prevent lock conflicts
+	sqlDB.SetMaxOpenConns(1) // SQLite works best with single writer
+	sqlDB.SetMaxIdleConns(1)
+	sqlDB.SetConnMaxLifetime(0)
 
 	db, err = gorm.Open(sqlite.Dialector{Conn: sqlDB}, &gorm.Config{})
 	if err != nil {
@@ -107,17 +112,58 @@ func DeleteApp(id uint) error {
 
 // createFTSTable creates the FTS5 virtual table for full-text search
 func createFTSTable() error {
-	// Create FTS5 virtual table
+	fmt.Println("------Creating FTS table------")
+	// Create FTS5 virtual table (standalone, no external content)
 	sql := `CREATE VIRTUAL TABLE IF NOT EXISTS apps_fts USING fts5(
 		company, 
 		position, 
-		notes, 
-		content='apps', 
-		content_rowid='app_id'
+		notes
 	)`
 
 	result := db.Exec(sql)
-	return result.Error
+	if result.Error != nil {
+		return result.Error
+	}
+
+	// Create triggers to keep FTS table in sync with apps table
+	triggers := []string{
+		// Insert trigger
+		`CREATE TRIGGER IF NOT EXISTS apps_ai AFTER INSERT ON apps BEGIN
+			INSERT INTO apps_fts(rowid, company, position, notes)
+			VALUES (new.app_id, new.company, new.position, new.notes);
+		END`,
+		// Delete trigger
+		`CREATE TRIGGER IF NOT EXISTS apps_ad AFTER DELETE ON apps BEGIN
+			DELETE FROM apps_fts WHERE rowid = old.app_id;
+		END`,
+		// Update trigger
+		`CREATE TRIGGER IF NOT EXISTS apps_au AFTER UPDATE ON apps BEGIN
+			UPDATE apps_fts 
+			SET company = new.company, position = new.position, notes = new.notes
+			WHERE rowid = old.app_id;
+		END`,
+	}
+
+	for _, trigger := range triggers {
+		result = db.Exec(trigger)
+		if result.Error != nil {
+			return result.Error
+		}
+	}
+
+	// Populate existing data
+	populateSQL := `INSERT INTO apps_fts(rowid, company, position, notes)
+		SELECT app_id, company, position, notes FROM apps
+		WHERE app_id NOT IN (SELECT rowid FROM apps_fts)`
+
+	fmt.Println("-----Populating FTS table with existing data-----")
+	result = db.Exec(populateSQL)
+	if result.Error != nil {
+		fmt.Printf("Error populating FTS: %v\n", result.Error)
+		return result.Error
+	}
+	fmt.Printf("Populated %d rows into FTS\n", result.RowsAffected)
+	return nil
 }
 
 // SearchApps performs full-text search on job applications
@@ -144,6 +190,22 @@ func SearchByCompany(companyName string) ([]models.JobApplication, error) {
 	if result.Error != nil {
 		return nil, result.Error
 	}
+	return apps, nil
+}
+
+func SearchByFullText(query string) ([]models.JobApplication, error) {
+	var apps []models.JobApplication
+
+	sql := `SELECT a.* FROM apps a 
+			JOIN apps_fts fts ON a.app_id = fts.rowid 
+			WHERE apps_fts MATCH ? 
+			ORDER BY bm25(apps_fts)`
+
+	result := db.Raw(sql, query).Scan(&apps)
+	if result.Error != nil {
+		return nil, fmt.Errorf("failed to search apps: %v", result.Error)
+	}
+
 	return apps, nil
 }
 
