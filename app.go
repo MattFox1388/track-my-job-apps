@@ -36,7 +36,7 @@ func (a *App) startup(ctx context.Context) {
 	}
 
 	// Check if database exists
-	dbExists := database.DatabaseExists()
+	// dbExists := database.DatabaseExists()
 
 	// Initialize backup service first (needed for restore)
 	backupService, err := backup.NewBackupService()
@@ -47,15 +47,13 @@ func (a *App) startup(ctx context.Context) {
 		log.Println("Backup service initialized successfully")
 		a.backup = backupService
 
-		// If database doesn't exist and we have backup service, try to restore
-		if !dbExists {
-			log.Println("Database not found, attempting to restore from backup...")
-			if err := a.backup.RestoreDatabase("job_apps.db"); err != nil {
-				log.Printf("Warning: Failed to restore database from backup: %v", err)
-				log.Println("Continuing with fresh database...")
-			} else {
-				log.Println("Database restored successfully from backup")
-			}
+		// Try to restore from backup
+		log.Println("Database not found, attempting to restore from backup...")
+		if err := a.backup.RestoreDatabase("job_apps.db"); err != nil {
+			log.Printf("Warning: Failed to restore database from backup: %v", err)
+			log.Println("Continuing with fresh database...")
+		} else {
+			log.Println("Database restored successfully from backup")
 		}
 	}
 
