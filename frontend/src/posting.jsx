@@ -7,7 +7,7 @@ const DUMMY_POSTINGS = [
         id: 1,
         link: 'https://example.com/job/1',
         descrip: 'We are seeking a talented Software Engineer to join our growing team. You will work on cutting-edge technologies and contribute to building scalable applications.',
-        qualifs: ['5+ years experience in software development', 'Proficiency in React and Node.js', 'Strong problem-solving skills', 'Bachelor\'s degree in Computer Science'],
+        qualifications: ['5+ years experience in software development', 'Proficiency in React and Node.js', 'Strong problem-solving skills', 'Bachelor\'s degree in Computer Science'],
         postedDate: '2025-10-01',
         companyName: 'TechCorp Solutions',
         reviewOutput: 'Strong match - Your experience aligns well with the requirements. The company culture emphasizes innovation and work-life balance.'
@@ -16,7 +16,7 @@ const DUMMY_POSTINGS = [
         id: 2,
         link: 'https://example.com/job/2',
         descrip: 'Looking for a Senior Backend Developer to architect and build robust API services. You\'ll be working with microservices and cloud infrastructure.',
-        qualifs: ['7+ years backend development', 'Experience with Go or Python', 'Knowledge of AWS/GCP', 'Database design expertise'],
+        qualifications: ['7+ years backend development', 'Experience with Go or Python', 'Knowledge of AWS/GCP', 'Database design expertise'],
         postedDate: '2025-09-28',
         companyName: 'CloudFirst Inc',
         reviewOutput: 'Good opportunity - Competitive salary range. Remote-friendly position with flexible hours.'
@@ -25,7 +25,7 @@ const DUMMY_POSTINGS = [
         id: 3,
         link: 'https://example.com/job/3',
         descrip: 'Join our startup as a Full Stack Developer! Help us build the next generation of fintech solutions.',
-        qualifs: ['3+ years full stack development', 'React and TypeScript', 'REST API design', 'Agile methodology experience'],
+        qualifications: ['3+ years full stack development', 'React and TypeScript', 'REST API design', 'Agile methodology experience'],
         postedDate: '2025-10-05',
         companyName: 'FinTech Innovations',
         reviewOutput: 'Moderate match - Startup environment with high growth potential but may require longer hours.'
@@ -34,30 +34,61 @@ const DUMMY_POSTINGS = [
 
 function Posting() {
     const [postings, setPostings] = useState([])
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, postingId: null })
 
     useEffect(() => {
-
         const fetchPostings = async () => { 
-            await window.go.main.App.GetRecentPostingsWithQualifications();
+            const results = await window.go.main.App.GetRecentPostingsWithQualifications();
+            results.map(result => {
+                result.qualifications = JSON.parse(result.qualifications)
+            })
         
-            // Using dummy data for now
-            setPostings(DUMMY_POSTINGS)
+            setPostings(results || [])
         }
-        // TODO: Replace with actual Wails backend call
-        // const fetchPostings = async () => {
-        //     const data = await window.go.main.App.GetJobPostings()
-        //     setPostings(data || [])
-        // }
-        // fetchPostings()
         fetchPostings()
     }, [])
+
+    useEffect(() => {
+        // Close context menu when clicking anywhere
+        const handleClick = () => setContextMenu(prev => ({ ...prev, visible: false }))
+        document.addEventListener('click', handleClick)
+        return () => document.removeEventListener('click', handleClick)
+    }, [])
+
+    const handleContextMenu = (e, postingId) => {
+        e.preventDefault()
+        setContextMenu({
+            visible: true,
+            x: e.clientX,
+            y: e.clientY,
+            postingId: postingId
+        })
+    }
+
+    const handleDelete = async () => {
+        if (!contextMenu.postingId) return
+        
+        try {
+            await window.go.main.App.DeletePosting(contextMenu.postingId)
+            // Remove from local state
+            setPostings(postings.filter(p => p.id !== contextMenu.postingId))
+            setContextMenu({ ...contextMenu, visible: false })
+        } catch (error) {
+            console.error('Failed to delete posting:', error)
+            alert('Failed to delete posting: ' + error)
+        }
+    }
 
     return (
         <div className="posting-container">
             <h1>Job Postings</h1>
             <div className="postings-list">
                 {postings.map((posting) => (
-                    <div key={posting.id} className="posting-card">
+                    <div 
+                        key={posting.id} 
+                        className="posting-card"
+                        onContextMenu={(e) => handleContextMenu(e, posting.id)}
+                    >
                         <h2 className="posting-title">{posting.companyName}</h2>
                         <a 
                             href={posting.link} 
@@ -74,7 +105,7 @@ function Posting() {
                             <div className="posting-qualifications">
                                 <strong>Qualifications:</strong>
                                 <ul>
-                                    {posting.qualifs.map((qual, idx) => (
+                                    {posting.qualifications.map((qual, idx) => (
                                         <li key={idx}>{qual}</li>
                                     ))}
                                 </ul>
@@ -90,6 +121,20 @@ function Posting() {
                     </div>
                 ))}
             </div>
+
+            {contextMenu.visible && (
+                <div 
+                    className="context-menu"
+                    style={{
+                        position: 'fixed',
+                        top: `${contextMenu.y}px`,
+                        left: `${contextMenu.x}px`,
+                        zIndex: 1000
+                    }}
+                >
+                    <button onClick={handleDelete}>Delete</button>
+                </div>
+            )}
         </div>
     )
 }

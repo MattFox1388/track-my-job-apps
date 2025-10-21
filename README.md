@@ -74,6 +74,55 @@ wails build -tags "fts5"
    wails dev -tags "fts5"
    ```
 
+## Configuration
+
+### Google Drive Backup (Optional)
+
+To enable Google Drive backup functionality, you need to set up OAuth2 credentials:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the Google Drive API:
+   - Navigate to "APIs & Services" > "Library"
+   - Search for "Google Drive API"
+   - Click "Enable"
+4. Create OAuth2 credentials:
+   - Go to "APIs & Services" > "Credentials"
+   - Click "Create Credentials" > "OAuth client ID"
+   - Select "Desktop app" as the application type
+   - Name it (e.g., "Track My Job Apps")
+   - Click "Create"
+5. Download the credentials:
+   - Click the download button (⬇) next to your newly created OAuth client
+   - Save the file as `credentials.json` in the project root directory
+
+On first backup, the app will open your browser for OAuth authorization and save a `token.json` file for future use.
+
+### Turso Database (Optional)
+
+If you want to use Turso as a remote database, set these environment variables:
+
+```bash
+# Windows PowerShell
+$env:TURSO_DATABASE_URL="libsql://your-database.turso.io"
+$env:TURSO_AUTH_TOKEN="your-auth-token-here"
+
+# Windows CMD
+set TURSO_DATABASE_URL=libsql://your-database.turso.io
+set TURSO_AUTH_TOKEN=your-auth-token-here
+
+# Linux/Mac
+export TURSO_DATABASE_URL="libsql://your-database.turso.io"
+export TURSO_AUTH_TOKEN="your-auth-token-here"
+```
+
+To get your Turso credentials:
+1. Sign up at [turso.tech](https://turso.tech)
+2. Install the Turso CLI: `curl -sSfL https://get.tur.so/install.sh | bash`
+3. Create a database: `turso db create job-apps`
+4. Get the URL: `turso db show job-apps --url`
+5. Get the token: `turso db tokens create job-apps`
+
 ## Project Structure
 
 ```

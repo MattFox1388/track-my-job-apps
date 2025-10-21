@@ -192,14 +192,6 @@ func (a *App) TestBackup() error {
 
 // GetRecentPostingsWithQualifications fetches recent job postings with qualifications from Turso
 func (a *App) GetRecentPostingsWithQualifications() ([]map[string]interface{}, error) {
-	// query := `
-	// 	SELECT p.id, p.link, p.descrip, p.postedDate, p.companyName, p.reviewOutput, q.qualification_text 
-	// 	FROM postings p
-	// 	JOIN qualifications q ON q.postings_id = p.id
-	// 	ORDER BY p.ingestDate DESC
-	// 	LIMIT 100
-	// `
-
 	query := `
 		SELECT
 		p.id,
@@ -238,4 +230,32 @@ func (a *App) GetRecentPostingsWithQualifications() ([]map[string]interface{}, e
 	}
 
 	return results, nil
+}
+
+// DeletePosting deletes a job posting and its qualifications from Turso by ID
+func (a *App) DeletePosting(postingID int64) error {
+	log.Printf("Deleting posting with ID: %d", postingID)
+
+	// First delete qualifications
+	deleteQualQuery := "DELETE FROM qualifications WHERE postings_id = ?"
+	_, err := database.ExecuteTursoExec(deleteQualQuery, postingID)
+	if err != nil {
+		log.Printf("Error deleting qualifications: %v", err)
+		return fmt.Errorf("failed to delete qualifications: %v", err)
+	}
+
+	// Then delete the posting
+	deletePostingQuery := "DELETE FROM postings WHERE id = ?"
+	rowsAffected, err := database.ExecuteTursoExec(deletePostingQuery, postingID)
+	if err != nil {
+		log.Printf("Error deleting posting: %v", err)
+		return fmt.Errorf("failed to delete posting: %v", err)
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("no posting found with ID: %d", postingID)
+	}
+
+	log.Printf("Successfully deleted posting ID %d", postingID)
+	return nil
 }

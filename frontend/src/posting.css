@@ -103,3 +103,27 @@
     text-align: right;
 }
 
+.context-menu {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+}
+
+.context-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: #e74c3c;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.context-menu button:hover {
+    background: #f8f9fa;
+}
