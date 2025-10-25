@@ -1,49 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
+import { BrowserOpenURL} from '../wailsjs/runtime/runtime'
 import './posting.css'
-
-// Dummy data
-const DUMMY_POSTINGS = [
-    {
-        id: 1,
-        link: 'https://example.com/job/1',
-        descrip: 'We are seeking a talented Software Engineer to join our growing team. You will work on cutting-edge technologies and contribute to building scalable applications.',
-        qualifications: ['5+ years experience in software development', 'Proficiency in React and Node.js', 'Strong problem-solving skills', 'Bachelor\'s degree in Computer Science'],
-        postedDate: '2025-10-01',
-        companyName: 'TechCorp Solutions',
-        reviewOutput: 'Strong match - Your experience aligns well with the requirements. The company culture emphasizes innovation and work-life balance.'
-    },
-    {
-        id: 2,
-        link: 'https://example.com/job/2',
-        descrip: 'Looking for a Senior Backend Developer to architect and build robust API services. You\'ll be working with microservices and cloud infrastructure.',
-        qualifications: ['7+ years backend development', 'Experience with Go or Python', 'Knowledge of AWS/GCP', 'Database design expertise'],
-        postedDate: '2025-09-28',
-        companyName: 'CloudFirst Inc',
-        reviewOutput: 'Good opportunity - Competitive salary range. Remote-friendly position with flexible hours.'
-    },
-    {
-        id: 3,
-        link: 'https://example.com/job/3',
-        descrip: 'Join our startup as a Full Stack Developer! Help us build the next generation of fintech solutions.',
-        qualifications: ['3+ years full stack development', 'React and TypeScript', 'REST API design', 'Agile methodology experience'],
-        postedDate: '2025-10-05',
-        companyName: 'FinTech Innovations',
-        reviewOutput: 'Moderate match - Startup environment with high growth potential but may require longer hours.'
-    }
-]
 
 function Posting() {
     const [postings, setPostings] = useState([])
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, postingId: null })
+    // Initialize as true to prevent saving until after restoration
+    const [isRestoring, setIsRestoring] = useState(() => {
+        return sessionStorage.getItem('postingsScrollPos') !== null
+    })
 
     useEffect(() => {
+        console.log('Posting component mounted...')
         const fetchPostings = async () => { 
-            const results = await window.go.main.App.GetRecentPostingsWithQualifications();
-            results.map(result => {
-                result.qualifications = JSON.parse(result.qualifications)
-            })
-        
-            setPostings(results || [])
+            try {
+                const results = await window.go.main.App.GetRecentPostingsWithQualifications() ||  [];
+                results.map(result => {
+                    result.qualifications = typeof result.qualifications === 'string' ? JSON.parse(result.qualifications) : result.qualifications
+                })
+            
+                setPostings(results || [])
+            } catch (error) {
+                console.error('Failed to fetch postings:', error)
+                setPostings([])
+            }
+           
         }
         fetchPostings()
     }, [])
@@ -54,6 +35,60 @@ function Posting() {
         document.addEventListener('click', handleClick)
         return () => document.removeEventListener('click', handleClick)
     }, [])
+
+    // Restore scroll position when postings are loaded (useLayoutEffect runs synchronously after DOM updates)
+    useLayoutEffect(() => { 
+        if (postings.length === 0) return
+        
+        const savedScrollPos = sessionStorage.getItem('postingsScrollPos')
+        console.log('Restoring scroll to:', savedScrollPos)
+        
+        if (savedScrollPos) {
+            const targetScroll = parseInt(savedScrollPos, 10)
+            
+            // Use setTimeout to ensure DOM is fully painted
+            setTimeout(() => {
+                window.scrollTo(0, targetScroll)
+                console.log('Restored to window.scrollY:', window.scrollY)
+                
+                // Allow saving again after restoration completes
+                setTimeout(() => {
+                    console.log('Restoration complete, enabling scroll saving')
+                    setIsRestoring(false)
+                }, 500)
+            }, 0)
+        } else {
+            // No saved position, enable scroll saving immediately
+            setIsRestoring(false)
+        }
+    }, [postings])
+
+    // Save scroll position continuously as user scrolls (but not during restoration)
+    useEffect(() => {
+        const saveScroll = () => {
+            if (isRestoring) {
+                console.log('Skipping save during restoration')
+                return
+            }
+            const pos = window.scrollY
+            console.log('Saving scroll position:', pos)
+            sessionStorage.setItem('postingsScrollPos', pos)
+        }
+        
+        // Throttle to avoid excessive saves
+        let timeoutId
+        const throttledSave = () => {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(saveScroll, 150)
+        }
+        
+        window.addEventListener('scroll', throttledSave)
+        
+        return () => {
+            window.removeEventListener('scroll', throttledSave)
+            clearTimeout(timeoutId)
+        }
+    }, [isRestoring])
 
     const handleContextMenu = (e, postingId) => {
         e.preventDefault()
@@ -80,7 +115,7 @@ function Posting() {
     }
 
     return (
-        <div className="posting-container">
+        <div className="posting-container" >
             <h1>Job Postings</h1>
             <div className="postings-list">
                 {postings.map((posting) => (
@@ -90,15 +125,12 @@ function Posting() {
                         onContextMenu={(e) => handleContextMenu(e, posting.id)}
                     >
                         <h2 className="posting-title">{posting.companyName}</h2>
-                        <a 
-                            href={posting.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="posting-link"
+                        <button 
+                            onClick={() => BrowserOpenURL(posting.link)}
+                            className="posting-link posting-link-button"
                         >
                             {posting.link}
-                        </a>
-                        
+                        </button>
                         <div className="posting-body">
                             <p className="posting-description">{posting.descrip}</p>
                             

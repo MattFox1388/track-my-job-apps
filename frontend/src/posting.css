@@ -127,3 +127,15 @@
 .context-menu button:hover {
     background: #f8f9fa;
 }
+
+.posting-link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.posting-link-button:hover {
+    text-decoration: underline;
+}

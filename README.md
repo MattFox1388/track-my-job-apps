@@ -74,6 +74,32 @@ wails build -tags "fts5"
    wails dev -tags "fts5"
    ```
 
+## Testing
+
+The frontend includes unit tests using Vitest and React Testing Library.
+
+### Run Tests
+
+```bash
+cd frontend
+npm test
+```
+
+### Run Tests with UI
+
+```bash
+cd frontend
+npm run test:ui
+```
+
+### Test Coverage
+
+Tests cover:
+- Component rendering and data fetching
+- User interactions (clicks, context menus)
+- Delete functionality with error handling
+- Edge cases (empty data, API errors)
+
 ## Configuration
 
 ### Google Drive Backup (Optional)
