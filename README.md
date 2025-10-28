@@ -149,6 +149,86 @@ To get your Turso credentials:
 4. Get the URL: `turso db show job-apps --url`
 5. Get the token: `turso db tokens create job-apps`
 
+### Database Migrations with Geni
+
+This project uses [geni](https://github.com/emilpriver/geni) for database migrations. Geni is a simple migration tool that works with Turso and SQLite.
+
+#### Installation
+
+```bash
+# macOS/Linux/WSL
+curl -sSL https://raw.githubusercontent.com/emilpriver/geni/main/install.sh | bash
+
+```
+
+#### Setup
+
+Geni requires `DATABASE_URL` and `DATABASE_TOKEN` environment variables:
+
+```bash
+# Linux/Mac
+export DATABASE_URL="libsql://your-database.turso.io"
+export DATABASE_TOKEN="your-auth-token-here"
+```
+
+**Note**: For local SQLite databases, use:
+```bash
+export DATABASE_URL="file:./job_apps.db"
+export DATABASE_TOKEN=""
+```
+
+#### Common Commands
+
+```bash
+# Create a new migration
+geni new add_user_table
+
+# Run all pending migrations
+geni up
+
+# Rollback the last migration
+geni down
+
+# Check migration status
+geni status
+
+# Run migrations in a specific directory
+geni up --dir ./migrations
+```
+
+#### Migration File Structure
+
+Migrations are SQL files in the format: `YYYYMMDDHHMMSS_description.sql`
+
+Example migration (`20241028120000_create_apps_table.sql`):
+```sql
+-- +migrate Up
+CREATE TABLE apps (
+    app_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company TEXT NOT NULL,
+    position TEXT NOT NULL,
+    date_applied TEXT,
+    status TEXT DEFAULT 'SUBMITTED'
+);
+
+-- +migrate Down
+DROP TABLE apps;
+```
+
+#### Composite Primary Key Migration
+
+To migrate the `apps` table to use a composite primary key (company, position, date_applied):
+
+1. Create migration:
+```bash
+geni new composite_pk_migration
+```
+
+3. Run the migration:
+```bash
+geni up
+```
+
 ## Project Structure
 
 ```
